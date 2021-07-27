@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.tynet</groupId>
+    <artifactId>base-bom</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>${project.artifactId}</name>
+    <description>Base (Bill of Materials) | 基础依赖版本管理</description>
+
+    <properties>
+        <!--
+        All dependencies listed in this pom will have version same as the version of this pom.
+        -->
+        <base.version>${project.version}</base.version>
+        <!-- SpringBoot版本 -->
+        <spring-boot.version>2.5.3</spring-boot.version>
+        <!-- 基础配置 -->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.locales>zh_CN</project.build.locales>
+    </properties>
+
+    <!-- 依赖管理 -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- 代码检查 -->
+            <dependency>
+                <groupId>org.jetbrains</groupId>
+                <artifactId>annotations</artifactId>
+                <!--<version>13.0</version>-->
+                <version>21.0.1</version>
+                <!-- 无效配置(待删除) -->
+                <!--<optional>true</optional>-->
+            </dependency>
+            <dependency>
+                <groupId>org.javassist</groupId>
+                <artifactId>javassist</artifactId>
+                <version>3.27.0-GA</version>
+            </dependency>
+            <!-- alipay -->
+            <dependency>
+                <groupId>com.alipay.sdk</groupId>
+                <artifactId>alipay-sdk-java</artifactId>
+                <!--<version>4.7.12.ALL</version>-->
+                <version>4.15.0.ALL</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <defaultGoal>install</defaultGoal>
+    </build>
+
+    <licenses>
+        <license>
+            <name>The MIT License (MIT)</name>
+            <url>https://github.com/JoeyBling/base-boot/blob/master/LICENSE</url>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>https://github.com/JoeyBling/base-boot</url>
+        <connection>https://github.com/JoeyBling/base-boot.git</connection>
+        <developerConnection>https://github.com/JoeyBling/</developerConnection>
+    </scm>
+
+    <developers>
+        <developer>
+            <name>周思伟</name>
+            <email>2434387555@qq.com</email>
+            <organization>周思伟</organization>
+        </developer>
+    </developers>
+
+    <distributionManagement>
+        <repository>
+            <id>maven-releases</id>
+            <url>https://nexus3.diandianys.com/nexus/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>maven-snapshots</id>
+            <url>https://nexus3.diandianys.com/nexus/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+</project>

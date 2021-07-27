@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent -->
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.5.3</version>
+    </parent>
+
+    <groupId>com.tynet</groupId>
+    <artifactId>base</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <!--<version>1.0.0.RELEASE</version>-->
+    <packaging>pom</packaging>
+
+    <modules>
+        <!-- 基础依赖版本管理，仅仅做个模块链接（方便打包） -->
+        <module>base-bom</module>
+
+        <!-- 基础公共服务模块，仅仅做个模块链接（方便打包） -->
+        <module>base-common</module>
+
+        <!-- 框架包 -->
+        <!--<module>base-core</module>-->
+        <!--<module>base-pojo</module>-->
+        <!--<module>base-api</module>-->
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+        <!-- 跳过测试 -->
+        <maven.test.skip>true</maven.test.skip>
+
+        <!-- core version -->
+        <cglib.version>3.3.0</cglib.version>
+        <mybatis.version>3.5.4</mybatis.version>
+        <mybatis-spring.version>2.0.4</mybatis-spring.version>
+        <mapper-spring-boot.version>2.1.5</mapper-spring-boot.version>
+        <pagehelper-spring-boot.version>1.2.13</pagehelper-spring-boot.version>
+        <orderby-helper.version>0.0.2</orderby-helper.version>
+        <pagehelper.version>5.1.11</pagehelper.version>
+        <druid-spring-boot.version>1.1.22</druid-spring-boot.version>
+
+        <shiro.version>1.5.3</shiro.version>
+        <shiro-redis.version>3.2.3</shiro-redis.version>
+
+        <!-- common tools version -->
+        <commons-lang3.version>3.10</commons-lang3.version>
+        <commons-text.version>1.8</commons-text.version>
+        <commons-codec.version>1.14</commons-codec.version>
+        <commons-httpclient.version>4.5.12</commons-httpclient.version>
+        <commons-net.version>3.6</commons-net.version>
+        <commons-io.version>2.6</commons-io.version>
+        <commons-beanutils.version>1.9.4</commons-beanutils.version>
+        <commons-fileupload.version>1.4</commons-fileupload.version>
+        <mapstruct.version>1.3.1.Final</mapstruct.version>
+
+        <hutool.version>5.3.3</hutool.version>
+        <guava.version>29.0-jre</guava.version>
+        <fastjson.version>1.2.68</fastjson.version>
+        <ognl.version>3.1.16</ognl.version> <!-- 后期考虑升级 -->
+
+        <!-- other tools version -->
+        <tynet.wechat4j-repeater.version>2.0.2-SNAPSHOT</tynet.wechat4j-repeater.version>
+        <hessian.version>4.0.63</hessian.version>
+        <bcprov.version>1.65</bcprov.version>
+        <poi.version>4.1.2</poi.version>
+        <rocketmq.version>4.7.0</rocketmq.version>
+        <freemarker.version>2.3.30</freemarker.version>
+        <google-zxing.version>3.4.0</google-zxing.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
