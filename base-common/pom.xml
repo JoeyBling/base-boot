@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.tynet.saas</groupId>
+    <groupId>com.tynet</groupId>
     <artifactId>base-common</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
@@ -15,7 +15,6 @@
         <!-- SpringBoot版本 -->
         <spring-boot.version>2.5.3</spring-boot.version>
         <!-- main version setting -->
-        <hutool.version>5.3.10</hutool.version>
         <!-- 基础配置 -->
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
@@ -74,13 +73,6 @@
             <artifactId>spring-webmvc</artifactId>
             <optional>true</optional>
         </dependency>
-        <!-- 国产工具包 -->
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-http</artifactId>
-            <version>${hutool.version}</version>
-            <optional>true</optional>
-        </dependency>
         <!-- apache 工具包 -->
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -93,6 +85,23 @@
             <version>2.7</version>
             <optional>true</optional>
         </dependency>
+        <!-- 国产工具包 -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.caucho</groupId>
+            <artifactId>hessian</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- FastJson 1.2.60 以下版本 有重大漏洞 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <optional>true</optional>
+        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -103,19 +112,6 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>com.caucho</groupId>
-            <artifactId>hessian</artifactId>
-            <version>4.0.65</version>
-            <optional>true</optional>
-        </dependency>
-        <!-- FastJson 1.2.60 以下版本 有重大漏洞 -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.76</version>
             <optional>true</optional>
         </dependency>
     </dependencies>

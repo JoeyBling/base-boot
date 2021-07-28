@@ -19,6 +19,10 @@
         <base.version>${project.version}</base.version>
         <!-- SpringBoot版本 -->
         <spring-boot.version>2.5.3</spring-boot.version>
+        <!-- main version setting -->
+        <hutool.version>5.7.5</hutool.version>
+        <!--TODO 待升级-->
+        <!--<hutool.version>5.7.6</hutool.version>-->
         <!-- 基础配置 -->
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -49,6 +53,35 @@
                 <artifactId>alipay-sdk-java</artifactId>
                 <!--<version>4.7.12.ALL</version>-->
                 <version>4.15.0.ALL</version>
+            </dependency>
+            <!-- 国产工具包 -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-bom</artifactId>
+                <version>${hutool.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.caucho</groupId>
+                <artifactId>hessian</artifactId>
+                <!-- 解决`BigDecimal`反序列化异常，默认`4.0.37`已经进行修复了，但是Mvn中央仓库没有收录此包
+                    官网链接：http://hessian.caucho.com/download/hessian-4.0.37.jar
+                    hessian-x.jar!\META-INF\hessian\serializers
+                    hessian-x.jar!\META-INF\hessian\deserializers
+                    Bug链接：http://bugs.caucho.com/view.php?id=3920 -->
+                <version>4.0.65</version>
+            </dependency>
+            <!-- FastJson 1.2.60 以下版本 有重大漏洞 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.2.76</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
