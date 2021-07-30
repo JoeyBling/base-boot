@@ -86,6 +86,11 @@
             <optional>true</optional>
         </dependency>
         <!-- 国产工具包 -->
+        <!--<dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-bom</artifactId>
+            <type>pom</type>
+        </dependency>-->
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
@@ -96,7 +101,6 @@
             <artifactId>hessian</artifactId>
             <optional>true</optional>
         </dependency>
-        <!-- FastJson 1.2.60 以下版本 有重大漏洞 -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>

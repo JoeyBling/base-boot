@@ -83,6 +83,7 @@ hs_err_pid*
 /gradlew.bat
 
 ### MAVEN ###
+# Maven wrapper artifacts
 !.mvn/wrapper/maven-wrapper.jar
 
 # Runtime data

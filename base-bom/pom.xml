@@ -20,9 +20,7 @@
         <!-- SpringBoot版本 -->
         <spring-boot.version>2.5.3</spring-boot.version>
         <!-- main version setting -->
-        <hutool.version>5.7.5</hutool.version>
-        <!--TODO 待升级-->
-        <!--<hutool.version>5.7.6</hutool.version>-->
+        <hutool.version>5.7.6</hutool.version>
         <!-- 基础配置 -->
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -60,7 +58,7 @@
                 <artifactId>hutool-bom</artifactId>
                 <version>${hutool.version}</version>
                 <type>pom</type>
-                <scope>import</scope>
+                <!--<scope>import</scope>-->
             </dependency>
             <dependency>
                 <groupId>cn.hutool</groupId>
