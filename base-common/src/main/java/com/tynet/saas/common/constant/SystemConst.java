@@ -12,6 +12,19 @@ import java.nio.charset.StandardCharsets;
 public class SystemConst {
 
     /**
+     * 默认编码
+     */
+    public static final Charset DEFAULT_CHARSET = StandardCharsets.UTF_8;
+
+    /**
+     * 默认时区ID
+     * <p>
+     * 缩写：GMT+8、完整：GMT+08:00
+     * </p>
+     */
+    public static final String DEFAULT_TIME_ZONE_ID = "GMT+8";
+
+    /**
      * 全局默认BigDecimal计算舍入模式
      *
      * @see BigDecimal#ROUND_UP 直接进位处理(tips:如果将要舍弃的位上的值是0，不做进位处理)
@@ -22,10 +35,5 @@ public class SystemConst {
      * @see BigDecimal#divide(BigDecimal, int)
      */
     public static final int GLOBAL_BIG_DECIMAL_ROUNDING_MODE = BigDecimal.ROUND_HALF_UP;
-
-    /**
-     * 默认编码
-     */
-    public static final Charset DEFAULT_CHARSET = StandardCharsets.UTF_8;
 
 }

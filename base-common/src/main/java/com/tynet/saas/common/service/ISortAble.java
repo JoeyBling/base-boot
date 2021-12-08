@@ -80,9 +80,7 @@ public interface ISortAble extends Comparable<ISortAble> {
         // NPE check
         Objects.requireNonNull(ctx);
         // 比较器
-        final Comparator<E> comparator = ISortAble::compareTo;
-        final Comparator<E> ableComparator = reversed ? Collections.reverseOrder(comparator) : comparator;
-        // final Comparator<E> ableComparator = reversed ? comparator.reversed() : comparator;
+        final Comparator<E> ableComparator = reversed ? Collections.reverseOrder(ISortAble::compareTo) : ISortAble::compareTo;
         return ctx.stream().sorted(ableComparator).collect(Collectors.toList());
     }
 

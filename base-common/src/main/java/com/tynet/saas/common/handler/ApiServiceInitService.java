@@ -65,9 +65,9 @@ public abstract class ApiServiceInitService implements IStartUp {
                                 MessageFormat.format("Api接口错误[{0}]", handler));
                     }
 
+                    // 方法名
+                    final String methodName = method.getName();
                     if (null == serviceMethod.name() || serviceMethod.name().length < 1) {
-                        // 方法名
-                        final String methodName = method.getName();
                         logger.warn("[{}]定义的接口名为空，使用默认方法名[{}]",
                                 ClassUtil.getClassName(method.getDeclaringClass(), false), methodName);
                         this.registerApiMethod(methodName, handler);

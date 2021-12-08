@@ -1,0 +1,151 @@
+# https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.0-Configuration-Changelog
+# https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.3.0-Configuration-Changelog
+# https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.4.0-Configuration-Changelog
+# https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-Config-Data-Migration-Guide
+debug: false
+
+server:
+  # 第三位单数是正式环境，双数为测试环境
+  port: 8767
+  tomcat:
+    uri-encoding: UTF-8
+    accesslog:
+      enabled: true
+      encoding: UTF-8
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-exception: true
+
+spring:
+  #  profiles:
+  #    active: dev
+  #  config:
+  #    import: optional:classpath:/application-dev.yml
+  application:
+    name: ${application.name:test}
+  aop:
+    auto: true
+    proxy-target-class: true
+  task:
+    scheduling:
+      pool:
+        size: 5
+  jackson:
+    default-property-inclusion: non_null
+    # 取消timestamps形式
+    serialization: { WRITE_DATES_AS_TIMESTAMPS: false, WRITE_ENUMS_USING_TO_STRING: true }
+    deserialization: { FAIL_ON_UNKNOWN_PROPERTIES: true }
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+  datasource:
+    # driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/bootplus?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: root
+    druid:
+      initial-size: 2
+      max-active: 20
+      min-idle: 3
+      max-wait: 60000
+      validation-query: SELECT 1 FROM DUAL
+      test-on-borrow: false
+      test-on-return: false
+      test-while-idle: true
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      # 合并多个DruidDataSource的监控数据
+      use-global-data-source-stat: true
+      # 配置多个英文逗号分隔
+      filters: slf4j
+      # druid监控配置
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        login-username: admin
+        login-password: www.hztywl.cn
+        reset-enable: true
+        allow: 192.168.0.1/16
+
+  jpa:
+    open-in-view: false
+  quartz:
+    # 覆盖已存在的任务
+    overwrite-existing-jobs: true
+
+# mybatis-mapper
+mapper:
+  #  not-empty: true
+  mappers:
+#    - tk.mybatis.mapper.common.Mapper
+
+management:
+  endpoint:
+    health:
+      show-details: always
+      enabled:
+    arthas:
+      enabled: true
+
+arthas:
+  agent-id: ${application.name:${spring.application.name:random}}
+
+################################### 程序自定义配置 ###################################
+
+application:
+  debug: true
+  # client-id: test
+  # 波浪线 - 代表空值
+  client-id: ~
+  name: @project.artifactId@
+  version: @project.version@
+  url: @project.url@
+  domain: https://dev-saas.diandianys.com/
+  storage-path: @project.basedir@
+  cache-config:
+    # {@link java.time.Duration#parse}
+    default-expire: PT60M
+    expire-map: { SMARTHOS_TOKEN: PT24H, SMARTHOS_CONFIG: PT24H, SMARTHOS_CAPTCHA: PT10M }
+  # 定时任务配置
+  task:
+    # 自定义线程池配置
+    thread-pool:
+      core-pool-size: 5
+      max-pool-size: 2000
+      queue-capacity: 200
+      keep-alive: PT20S
+      thread-name-prefix: ${application.name:zhousiwei}-task-
+  mvc:
+    view-resolvers:
+      - { urlPath: '/',viewName: 'redirect:/app' }
+    cors:
+      - path-pattern: /**
+        allowCredentials: true
+        maxAge: 3600
+        allowedOrigins:
+          - '*'
+        allowedHeaders:
+          - '*'
+        allowedMethods:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - OPTIONS
+      - path-pattern: /test
+        allowCredentials: false
+        allowedMethods:
+          - GET
+  prj:
+    sequence-work-id: 1
+
+info:
+  app:
+    name: ${application.name}
+    java:
+      source: @maven.compiler.source@
+      target: @maven.compiler.target@

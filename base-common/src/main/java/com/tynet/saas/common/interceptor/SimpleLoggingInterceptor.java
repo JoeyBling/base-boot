@@ -24,7 +24,7 @@ public class SimpleLoggingInterceptor extends MyHandlerInterceptorAdapter implem
      * 默认本地执行线程开始时间标识
      */
     protected static final ThreadLocal<Long> START_TIME_THREAD_LOCAL = new NamedThreadLocal<Long>("ThreadLocal_StartTime") {
-        private final Logger logger = LoggerFactory.getLogger(this.getClass());
+        protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
         @Override
         protected Long initialValue() {
@@ -71,7 +71,8 @@ public class SimpleLoggingInterceptor extends MyHandlerInterceptorAdapter implem
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        if (StringUtils.equalsAny(request.getRequestURI(), "/favicon.ico", "", "/")) {
+        if (StringUtils.equalsAny(request.getRequestURI(),
+                "/favicon.ico", "", "/")) {
             return;
         }
         try {

@@ -132,9 +132,8 @@ _book
 
 # Custom rules
 .history
-application.yml.bak
-#application-prd.yml
-#application-dev.yml
+application-dev.yml
+application-master.yml
 
 ### Api Doc Files ###
 doc/

@@ -23,7 +23,7 @@ public interface IAppProperties {
 
     /**
      * 是否是调试模式
-     * <p>Defaults false
+     * <p>Defaults {@code false}.
      *
      * @return boolean
      */
@@ -83,6 +83,7 @@ public interface IAppProperties {
          * @return Duration
          */
         public Duration getExpire(String name) {
+            // return this.expireMap.getOrDefault(name, this.defaultExpire);
             return Optional.ofNullable(this.expireMap.get(name)).orElse(this.defaultExpire);
         }
     }

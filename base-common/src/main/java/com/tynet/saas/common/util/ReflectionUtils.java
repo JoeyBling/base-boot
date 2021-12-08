@@ -39,7 +39,7 @@ public abstract class ReflectionUtils extends org.springframework.util.Reflectio
      * @param e 异常抽象
      * @return 真实目标异常
      */
-    public static @NotNull Throwable getRealThrowable(@NotNull Throwable e) {
+    public static @NotNull Throwable getRealThrowable(@NotNull final Throwable e) {
         return GET_REAL_THROWABLE_FUNCTION.apply(e);
     }
 

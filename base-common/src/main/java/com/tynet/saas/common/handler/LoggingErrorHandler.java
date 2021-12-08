@@ -1,10 +1,10 @@
 package com.tynet.saas.common.handler;
 
+import com.tynet.saas.common.util.ReflectionUtils;
 import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.ErrorHandler;
-import org.springframework.util.ReflectionUtils;
 
 /**
  * 自定义错误日志处理器

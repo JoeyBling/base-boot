@@ -1,7 +1,6 @@
 package com.tynet.saas.common.util;
 
 import java.math.BigDecimal;
-import java.security.SecureRandom;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -14,26 +13,6 @@ import java.util.TimeZone;
  * @author Created by 思伟 on 2021/2/22
  */
 public class StringUtils extends org.apache.commons.lang3.StringUtils {
-
-    /**
-     * 日期时间格式(yyyy-MM-dd HH:mm:ss)
-     */
-    static String DATE_TIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
-    /**
-     * 默认时区
-     */
-    static String DATE_TIMEZONE = "GMT+8";
-
-    /**
-     * 数字字符数组
-     */
-    private final static char[] NUM_CHAR_ARR = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
-    /**
-     * 数字+大小写英文字符数组
-     */
-    private final static char[] STR_CHAR_ARR = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q',
-            'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
-            'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
 
     /**
      * 将对象转换为String
@@ -60,8 +39,8 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
         } else if (value instanceof Boolean) {
             strValue = ((Boolean) value).toString();
         } else if (value instanceof Date) {
-            DateFormat format = new SimpleDateFormat(DATE_TIME_PATTERN);
-            format.setTimeZone(TimeZone.getTimeZone(DATE_TIMEZONE));
+            DateFormat format = new SimpleDateFormat(DateUtils.DATE_TIME_PATTERN);
+            format.setTimeZone(DateUtils.DEFAULT_TIME_ZONE);
             strValue = format.format((Date) value);
         } else if (value.getClass().isArray()) {
             strValue = Arrays.toString((Object[]) value);
@@ -131,64 +110,10 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     }
 
     /**
-     * 生成随机密码带字符
-     *
-     * @param pwdLen 生成密码的总长度
-     * @return 密码字符串
-     */
-    public static String genRandomStr(int pwdLen) {
-        return getRandomStr(pwdLen, STR_CHAR_ARR);
-    }
-
-    /**
-     * 生成纯数字随机密码
-     *
-     * @param pwdLen 生成的密码的总长度
-     * @return 密码的字符串
-     */
-    public static String genRandomForNumStr(int pwdLen) {
-        return getRandomStr(pwdLen, NUM_CHAR_ARR);
-    }
-
-    /**
-     * 指定字符数组生成指定长度的随机数
-     *
-     * @param pwdLen  随机数长度
-     * @param charArr 字符数组
-     * @return String
-     */
-    private static String getRandomStr(final int pwdLen, final char[] charArr) {
-        // 生成的随机数下标
-        int randomIndex;
-        // 生成的密码的长度
-        int count = 0;
-
-        StringBuffer pwd = new StringBuffer(EMPTY);
-        SecureRandom random = new SecureRandom();
-        while (count < pwdLen) {
-            /**
-             * 生成随机数，取绝对值，防止生成负数
-             * <p>
-             * 随机返回一个值在[0-num]的int类型的整数,包括0不包括num
-             * </p>
-             */
-            randomIndex = Math.abs(random.nextInt(charArr.length));
-            if (randomIndex >= 0 && randomIndex < charArr.length) {
-                pwd.append(charArr[randomIndex]);
-                ++count;
-            }
-        }
-        return pwd.toString();
-    }
-
-    /**
      * just test
      */
     public static void main(String[] args) {
         System.out.println(format("{}{}_JoeyBling_Blog:{}",
                 new Date(), "周思伟", "https://zhousiwei.gitee.io/ibooks/"));
-        for (int i = 0; i < 1000; i++) {
-            System.out.println(genRandomForNumStr(4));
-        }
     }
 }

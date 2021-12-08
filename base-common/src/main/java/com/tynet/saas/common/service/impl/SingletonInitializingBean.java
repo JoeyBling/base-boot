@@ -14,10 +14,11 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 public abstract class SingletonInitializingBean implements MyInitializingBean {
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     /**
      * 初始化标识
      */
-    protected AtomicBoolean initFlag = new AtomicBoolean(false);
+    protected final AtomicBoolean initFlag = new AtomicBoolean(false);
 
     /**
      * 是否已初始化完成

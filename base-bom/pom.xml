@@ -1,10 +1,9 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.tynet</groupId>
+    <groupId>com.tynet.saas</groupId>
     <artifactId>base-bom</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -20,10 +19,13 @@
         <!-- SpringBoot版本 -->
         <spring-boot.version>2.5.3</spring-boot.version>
         <!-- main version setting -->
-        <hutool.version>5.7.6</hutool.version>
+        <hutool.version>5.7.14</hutool.version>
+        <guava.version>31.0.1-jre</guava.version>
+        <ognl.version>3.2.21</ognl.version>
         <!-- 基础配置 -->
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.locales>zh_CN</project.build.locales>
     </properties>
@@ -35,15 +37,16 @@
             <dependency>
                 <groupId>org.jetbrains</groupId>
                 <artifactId>annotations</artifactId>
-                <!--<version>13.0</version>-->
-                <version>21.0.1</version>
+                <version>22.0.0</version>
+                <scope>provided</scope>
                 <!-- 无效配置(待删除) -->
                 <!--<optional>true</optional>-->
             </dependency>
             <dependency>
                 <groupId>org.javassist</groupId>
                 <artifactId>javassist</artifactId>
-                <version>3.27.0-GA</version>
+                <!--<version>3.27.0-GA</version>-->
+                <version>3.28.0-GA</version>
             </dependency>
             <!-- alipay -->
             <dependency>
@@ -79,11 +82,24 @@
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
-                <version>1.2.76</version>
+                <version>1.2.78</version>
+            </dependency>
+            <!-- google java lib -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+            <!-- ognl语言工具包 -->
+            <dependency>
+                <groupId>ognl</groupId>
+                <artifactId>ognl</artifactId>
+                <version>${ognl.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
 
+    <!-- 构建管理 -->
     <build>
         <defaultGoal>install</defaultGoal>
     </build>
@@ -111,13 +127,22 @@
 
     <distributionManagement>
         <repository>
-            <id>maven-releases</id>
+            <id>releases</id>
             <url>https://nexus3.diandianys.com/nexus/repository/maven-releases/</url>
         </repository>
         <snapshotRepository>
-            <id>maven-snapshots</id>
+            <id>snapshots</id>
             <url>https://nexus3.diandianys.com/nexus/repository/maven-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
+
+    <!-- Apache Maven for use with GitHub Packages -->
+    <!--<distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub OWNER Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/JoeyBling/base-boot</url>
+        </repository>
+    </distributionManagement>-->
 
 </project>

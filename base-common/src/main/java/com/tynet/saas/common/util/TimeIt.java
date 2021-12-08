@@ -1,12 +1,13 @@
 package com.tynet.saas.common.util;
 
+import com.tynet.saas.common.function.VoidFunc;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 
+import java.time.Duration;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.Callable;
-import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 /**
@@ -18,38 +19,25 @@ import java.util.function.Function;
 public class TimeIt {
 
     /**
-     * 自定义无参无返回值的功能接口
+     * 基于{@link VoidFunc}进行耗时日志输出
+     *
+     * @see #printTime(VoidFunc, String, Logger)
      */
-    @FunctionalInterface
-    public interface TimeItService {
-        /**
-         * 执行
-         *
-         * @throws Exception
-         */
-        void exec() throws Exception;
+    public static void printTime(VoidFunc voidFunc, String message) throws Exception {
+        printTime(voidFunc, message, null);
     }
 
     /**
-     * 基于{@link TimeItService}进行耗时日志输出
+     * 基于{@link VoidFunc}进行耗时日志输出
      *
-     * @see #printTime(TimeItService, String, Logger)
+     * @param voidFunc 自定义功能接口
+     * @param message  日志消息
+     * @param logger   日志输出
      */
-    public static void printTime(TimeItService itService, String message) throws Exception {
-        printTime(itService, message, null);
-    }
-
-    /**
-     * 基于{@link TimeItService}进行耗时日志输出
-     *
-     * @param itService 自定义功能接口
-     * @param message   日志消息
-     * @param logger    日志输出
-     */
-    public static void printTime(TimeItService itService, String message, Logger logger) throws Exception {
-        Objects.requireNonNull(itService, "itService is null");
+    public static void printTime(VoidFunc voidFunc, String message, Logger logger) throws Exception {
+        Objects.requireNonNull(voidFunc, "voidFunc is null");
         long startTime = System.currentTimeMillis();
-        itService.exec();
+        voidFunc.exec();
         // 输出消耗时间日志 - TODO 是否考虑`finally`输出？
         outLog(message, logger, startTime);
     }
@@ -133,21 +121,17 @@ public class TimeIt {
      */
     public static void main(String[] args) throws Exception {
         log.debug("{}", printTime(() -> {
-            TimeUnit.MILLISECONDS.sleep(200);
-            // TimeUnit.SECONDS.sleep(1);
+            ExecutorUtil.sleep(Duration.ofMillis(200));
             return 1;
         }, "测试"));
 
         printTime(() -> {
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+            ExecutorUtil.sleep(Duration.ofSeconds(1));
         }, "自定义功能接口");
 
-        log.debug("{}", printTime((Integer o) -> o + 1, "Test", null).apply(2));
-        log.debug("{}", printTime((Integer o) -> o + 1, "Test", null));
+        final Function<Integer, Integer> testFunction = (Integer o) -> o + 1;
+        log.debug("{}", printTime(testFunction, "Test", null).apply(2));
+        log.debug("{}", printTime(testFunction, "Test", null));
     }
 
 }

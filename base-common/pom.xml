@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.tynet</groupId>
+    <groupId>com.tynet.saas</groupId>
     <artifactId>base-common</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
@@ -16,11 +16,15 @@
         <spring-boot.version>2.5.3</spring-boot.version>
         <!-- main version setting -->
         <!-- 基础配置 -->
+        <java.version>1.8</java.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- 跳过测试 -->
+        <maven.test.skip>true</maven.test.skip>
     </properties>
 
     <!-- 依赖管理 -->
@@ -49,6 +53,7 @@
 
     <!-- 基础模块非必须依赖则默认为可选依赖 -->
     <dependencies>
+        <!-- 注意：依赖范围为`provided`不会传递依赖 -->
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
@@ -58,44 +63,52 @@
             <artifactId>spring-boot-starter-logging</artifactId>
             <optional>true</optional>
         </dependency>
+        <!-- https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.3-Release-Notes -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
             <optional>true</optional>
         </dependency>
+        <!-- spring-web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
             <optional>true</optional>
         </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <optional>true</optional>
-        </dependency>
+        <!-- <dependency>
+             <groupId>org.springframework.boot</groupId>
+             <artifactId>spring-boot-starter-tomcat</artifactId>
+             <optional>true</optional>
+         </dependency>-->
         <!-- apache 工具包 -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
+            <!--<optional>true</optional>-->
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
             <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.7</version>
+            <version>2.11.0</version>
             <optional>true</optional>
         </dependency>
         <!-- 国产工具包 -->
-        <!--<dependency>
+        <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-bom</artifactId>
             <type>pom</type>
-        </dependency>-->
-        <dependency>
+            <optional>true</optional>
+        </dependency>
+        <!--<dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
             <optional>true</optional>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>com.caucho</groupId>
             <artifactId>hessian</artifactId>
@@ -106,6 +119,18 @@
             <artifactId>fastjson</artifactId>
             <optional>true</optional>
         </dependency>
+        <!-- google java lib -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- ognl语言工具包 -->
+        <dependency>
+            <groupId>ognl</groupId>
+            <artifactId>ognl</artifactId>
+            <optional>true</optional>
+        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -113,13 +138,13 @@
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-            <optional>true</optional>
         </dependency>
     </dependencies>
 
+    <!-- 构建管理 -->
     <build>
         <defaultGoal>install</defaultGoal>
         <pluginManagement>
@@ -132,6 +157,8 @@
                         <source>${maven.compiler.source}</source>
                         <target>${maven.compiler.target}</target>
                         <encoding>${project.build.sourceEncoding}</encoding>
+                        <!-- 保留有意义的参数名：https://stackoverflow.com/q/64699000/8470159 -->
+                        <parameters>true</parameters>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -151,6 +178,11 @@
                         </execution>
                     </executions>
                 </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven-surefire-plugin.version}</version>
+                </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
@@ -163,12 +195,22 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
             </plugin>
+            <plugin>
+                <!-- https://maven.apache.org/surefire/maven-surefire-plugin/examples/skipping-tests.html -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <!-- 跳过测试阶段或者使用 `mvn clean package -Dmaven.test.skip=true` -->
+                    <skipTests>${maven.test.skip}</skipTests>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
+            <!-- <url>https://www.apache.org/licenses/LICENSE-2.0</url> -->
             <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
             <distribution>repo</distribution>
             <comments>A business-friendly OSS license</comments>
@@ -191,12 +233,13 @@
 
     <distributionManagement>
         <repository>
-            <id>maven-releases</id>
+            <id>releases</id>
             <url>https://nexus3.diandianys.com/nexus/repository/maven-releases/</url>
         </repository>
         <snapshotRepository>
-            <id>maven-snapshots</id>
+            <id>snapshots</id>
             <url>https://nexus3.diandianys.com/nexus/repository/maven-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
+
 </project>

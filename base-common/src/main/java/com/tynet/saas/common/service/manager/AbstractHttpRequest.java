@@ -23,7 +23,7 @@ import java.time.Duration;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.function.Supplier;
+import java.util.function.Function;
 
 /**
  * 公用简单API接口Http请求抽象实现
@@ -75,7 +75,6 @@ public abstract class AbstractHttpRequest<T> extends SingletonInitializingBean {
      * @return 装饰后的对象
      */
     protected Logger decorateLogger(Logger logger) {
-        // return new AbstractSlfLoggerDecorator(logger);
         return new PrefixSlfLoggerDecorator(logger, this.getLogPrefix());
     }
 
@@ -235,15 +234,17 @@ public abstract class AbstractHttpRequest<T> extends SingletonInitializingBean {
      * @param result 接口响应数据
      * @return JSONObject
      */
-    protected JSONObject getJsonObj(final String result) {
+    protected <T extends CharSequence> JSONObject getJsonObj(final T result) {
         /**
+         * 获取JSON对象函数
+         * <p>
          * 适应返回任意JSON形式
          * 1. {@link JSONObject} JSON对象 {@link JSON#parseObject}
          * 2. {@link JSONArray} JSON数组 {@link JSON#parseArray}
+         * </p>
          */
-        Supplier<JSONObject> resultSupplier = () -> {
-            final Object jsonResult = Optional.ofNullable(JSON.parse(result)).orElse(new JSONObject());
-            // TODO 特殊对象是否开放子类重写
+        final Function<T, JSONObject> GET_JSON_OBJ_FUNCTION = t -> {
+            final Object jsonResult = Optional.ofNullable(JSON.parse(t.toString())).orElse(new JSONObject());
             if (null == jsonResult) {
                 // NPE
             } else if (JSONObject.class.isAssignableFrom(jsonResult.getClass())) {
@@ -252,11 +253,12 @@ public abstract class AbstractHttpRequest<T> extends SingletonInitializingBean {
                 // 如果是JSON数组，取第一个对象 (注意下标溢出)
                 return (JSONObject) ((JSONArray) jsonResult).get(0);
             } else {
+                // TODO 特殊对象是否开放子类重写
                 getLogger().warn("未处理的响应对象[{}]", jsonResult.getClass().getName());
             }
             throw new JSONException("接口响应异常");
         };
-        return resultSupplier.get();
+        return GET_JSON_OBJ_FUNCTION.apply(result);
     }
 
     /**
