@@ -1,4 +1,4 @@
-package com.tynet.frame.prjext;
+package com.tynet.frame.prj;
 
 import com.tynet.saas.common.hessian.IStartUp;
 import com.tynet.saas.common.service.adapter.IAppPropertiesAdapter;

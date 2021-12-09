@@ -1,6 +1,6 @@
 package com.tynet.config;
 
-import com.tynet.frame.prjext.ApplicationProperties;
+import com.tynet.frame.prj.ApplicationProperties;
 import com.tynet.saas.common.handler.LoggingAsyncUncaughtExceptionHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

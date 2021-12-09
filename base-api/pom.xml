@@ -197,7 +197,7 @@
             <properties>
                 <package.environment>dev</package.environment>
                 <!-- 预发布模块依赖项范围 -->
-                <pre-release.dependencies.scope>test</pre-release.dependencies.scope>
+                <pre-release.dependencies.scope>compile</pre-release.dependencies.scope>
             </properties>
         </profile>
         <profile>

@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- * 自定义程序配置属性
+ * 自定义程序配置属性 - 扩展配置
  *
  * @author Created by 思伟 on 2021/12/3
  */

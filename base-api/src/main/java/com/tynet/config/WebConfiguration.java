@@ -1,7 +1,7 @@
 package com.tynet.config;
 
 import com.google.common.collect.Lists;
-import com.tynet.frame.prjext.ApplicationProperties;
+import com.tynet.frame.prj.ApplicationProperties;
 import com.tynet.saas.common.constant.SystemConst;
 import com.tynet.saas.common.hessian.IAppProperties;
 import com.tynet.saas.common.interceptor.SimpleLoggingInterceptor;

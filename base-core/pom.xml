@@ -39,6 +39,12 @@
 
     <!-- 依赖项定义 -->
     <dependencies>
+        <!-- 在yml中读取pom.xml配置使用 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
