@@ -87,9 +87,21 @@ management:
   endpoint:
     health:
       show-details: always
-      enabled:
     arthas:
       enabled: true
+  info:
+    java:
+      # https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.6-Release-Notes
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - info
+          - env
+          - beans
+          - arthas
 
 arthas:
   agent-id: ${application.name:${spring.application.name:random}}

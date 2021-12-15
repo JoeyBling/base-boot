@@ -192,19 +192,19 @@
             </properties>
         </profile>
         <profile>
+            <!-- 单元测试 -->
+            <id>unit-test</id>
+            <properties>
+                <maven.test.skip>false</maven.test.skip>
+            </properties>
+        </profile>
+        <profile>
             <!-- 开发环境 -->
             <id>dev</id>
             <properties>
                 <package.environment>dev</package.environment>
                 <!-- 预发布模块依赖项范围 -->
                 <pre-release.dependencies.scope>compile</pre-release.dependencies.scope>
-            </properties>
-        </profile>
-        <profile>
-            <!-- 测试环境 -->
-            <id>test</id>
-            <properties>
-                <package.environment>test</package.environment>
             </properties>
         </profile>
         <profile>
