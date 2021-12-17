@@ -4,7 +4,7 @@ import com.tynet.saas.common.util.StringUtils;
 import org.slf4j.Logger;
 
 /**
- * 基于{@link Logger}日志前缀装饰器实现
+ * 基于{@link org.slf4j.Logger}日志前缀装饰器实现
  *
  * @author Created by 思伟 on 2021/4/23
  */
@@ -73,6 +73,11 @@ public class PrefixSlfLoggerDecorator extends AbstractSlfLoggerDecorator {
     @Override
     public void warn(String format, Object... arguments) {
         super.warn(addLogPrefix(format), arguments);
+    }
+
+    @Override
+    public void warn(String format, Object arg1, Object arg2) {
+        super.warn(addLogPrefix(format), arg1, arg2);
     }
 
     @Override
