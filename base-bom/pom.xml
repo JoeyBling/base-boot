@@ -17,7 +17,7 @@
         -->
         <base.version>${project.version}</base.version>
         <!-- SpringBoot版本 -->
-        <spring-boot.version>2.6.1</spring-boot.version>
+        <spring-boot.version>2.6.2</spring-boot.version>
         <!-- main version setting -->
         <hutool.version>5.7.14</hutool.version>
         <guava.version>31.0.1-jre</guava.version>

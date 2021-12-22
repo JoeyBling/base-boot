@@ -13,7 +13,7 @@
     <!-- 项目属性 -->
     <properties>
         <!-- SpringBoot版本 -->
-        <spring-boot.version>2.6.1</spring-boot.version>
+        <spring-boot.version>2.6.2</spring-boot.version>
         <!-- main version setting -->
         <!-- 基础配置 -->
         <java.version>1.8</java.version>

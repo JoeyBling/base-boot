@@ -13,8 +13,8 @@
     <!-- 项目属性 -->
     <properties>
         <!-- main version setting -->
-        <lombok.version>1.18.20</lombok.version>
-        <junit-jupiter.version>5.7.2</junit-jupiter.version>
+        <lombok.version>1.18.22</lombok.version>
+        <junit-jupiter.version>5.8.2</junit-jupiter.version>
         <!-- 基础配置 -->
         <java.version>1.8</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
