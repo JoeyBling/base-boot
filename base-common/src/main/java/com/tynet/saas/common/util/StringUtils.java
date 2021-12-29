@@ -38,12 +38,17 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
             strValue = ((Double) value).toString();
         } else if (value instanceof Boolean) {
             strValue = ((Boolean) value).toString();
+        } else if (value.getClass().isArray()) {
+            // 基本数据类型处理...
+            if (value instanceof char[]) {
+                strValue = Arrays.toString((char[]) value);
+            } else {
+                strValue = Arrays.toString((Object[]) value);
+            }
         } else if (value instanceof Date) {
             DateFormat format = new SimpleDateFormat(DateUtils.DATE_TIME_PATTERN);
             format.setTimeZone(DateUtils.DEFAULT_TIME_ZONE);
             strValue = format.format((Date) value);
-        } else if (value.getClass().isArray()) {
-            strValue = Arrays.toString((Object[]) value);
         } else {
             strValue = value.toString();
         }
