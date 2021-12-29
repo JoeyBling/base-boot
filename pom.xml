@@ -49,7 +49,7 @@
         <pagehelper-spring-boot.version>1.2.13</pagehelper-spring-boot.version>
         <orderby-helper.version>0.0.2</orderby-helper.version>
         <pagehelper.version>5.1.11</pagehelper.version>
-        <druid-spring-boot.version>1.1.22</druid-spring-boot.version>
+        <druid-spring-boot.version>1.2.8</druid-spring-boot.version>
 
         <!-- common tools version -->
         <commons-lang3.version>3.12.0</commons-lang3.version>
@@ -62,7 +62,6 @@
         <commons-fileupload.version>1.4</commons-fileupload.version>
 
         <!-- other tools version -->
-        <bcprov.version>1.69</bcprov.version>
         <google-zxing.version>3.4.1</google-zxing.version>
         <poi.version>5.1.0</poi.version>
         <jsoup.version>1.14.3</jsoup.version>
@@ -93,11 +92,11 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!-- 加密工具类 - 漏洞版本：>= 1.65, < 1.67 -->
+            <!-- poi office -->
             <dependency>
-                <groupId>org.bouncycastle</groupId>
-                <artifactId>bcprov-jdk15on</artifactId>
-                <version>${bcprov.version}</version>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>${poi.version}</version>
             </dependency>
             <!-- 条形码、二维码生成 -->
             <dependency>
@@ -111,12 +110,6 @@
                 <artifactId>kaptcha</artifactId>
                 <version>0.0.9</version>
             </dependency>
-            <!-- poi office -->
-            <dependency>
-                <groupId>org.apache.poi</groupId>
-                <artifactId>poi-ooxml</artifactId>
-                <version>${poi.version}</version>
-            </dependency>
             <!-- HTML解析器 -->
             <dependency>
                 <groupId>org.jsoup</groupId>
@@ -128,6 +121,12 @@
                 <groupId>com.taobao.arthas</groupId>
                 <artifactId>arthas-spring-boot-starter</artifactId>
                 <version>${arthas-spring-boot.version}</version>
+            </dependency>
+            <!-- druid连接池 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid-spring-boot.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -148,6 +147,11 @@
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
+        </dependency>
+        <!-- 加密工具类 -->
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>

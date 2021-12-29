@@ -90,16 +90,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!-- 加密工具类 -->
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-jdk15on</artifactId>
-        </dependency>
-        <!-- hessian -->
-        <dependency>
-            <groupId>com.caucho</groupId>
-            <artifactId>hessian</artifactId>
-        </dependency>
         <!-- 条形码、二维码生成 -->
         <dependency>
             <groupId>com.google.zxing</groupId>

@@ -54,14 +54,30 @@ spring:
       test-on-borrow: false
       test-on-return: false
       test-while-idle: true
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
       time-between-eviction-runs-millis: 60000
       min-evictable-idle-time-millis: 300000
-      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
-      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      # 合并执行的相同sql、慢SQL记录
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000;password=${spring.datasource.password}
       # 合并多个DruidDataSource的监控数据
       use-global-data-source-stat: true
       # 配置多个英文逗号分隔
-      filters: slf4j
+      # filters: stat,wall,slf4j
+      filter:
+        stat:
+          enabled: true
+        wall:
+          enabled: true
+          config:
+            # 批量操作
+            multi-statement-allow: true
+        slf4j:
+          enabled: true
+      web-stat-filter:
+        enabled: false
+        url-pattern: /*
+        exclusions: '*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*'
       # druid监控配置
       stat-view-servlet:
         enabled: true

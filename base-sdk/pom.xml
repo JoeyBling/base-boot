@@ -83,6 +83,12 @@
             <artifactId>ognl</artifactId>
             <optional>true</optional>
         </dependency>
+        <!-- 加密工具类 -->
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+            <optional>true</optional>
+        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
