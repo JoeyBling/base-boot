@@ -3,9 +3,14 @@ package com.tynet.config;
 import com.tynet.frame.prj.ApplicationProperties;
 import com.tynet.frame.prjext.MyApplicationProperties;
 import com.tynet.saas.common.hessian.IAppProperties;
+import com.tynet.saas.common.service.ICipherService;
+import com.tynet.saas.common.service.impl.MD5CipherService;
+import com.tynet.saas.common.service.impl.NoOpCipherService;
+import com.tynet.saas.common.service.impl.SM4CipherService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 /**
  * 自定义程序配置
@@ -46,6 +51,34 @@ public class MyBootConfig {
     @ConditionalOnMissingBean
     public MyApplicationProperties myApplicationProperties() {
         return new MyApplicationProperties();
+    }
+
+    /**
+     * 默认{@link ICipherService}实现
+     */
+    @Bean
+    @Primary
+    @ConditionalOnMissingBean
+    public ICipherService defaultCipherService() {
+        return NoOpCipherService.getInstance();
+    }
+
+    /**
+     * MD5算法
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    public MD5CipherService md5CipherService() {
+        return new MD5CipherService();
+    }
+
+    /**
+     * SM4国密算法
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    public SM4CipherService sm4CipherService() {
+        return new SM4CipherService();
     }
 
 }

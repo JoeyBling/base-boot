@@ -15,6 +15,7 @@
         <!-- SpringBoot版本 -->
         <spring-boot.version>2.6.2</spring-boot.version>
         <!-- main version setting -->
+        <druid.version>1.2.8</druid.version>
         <!-- 基础配置 -->
         <java.version>1.8</java.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
@@ -135,6 +136,12 @@
         <dependency>
             <groupId>org.bouncycastle</groupId>
             <artifactId>bcprov-jdk15on</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>${druid.version}</version>
             <optional>true</optional>
         </dependency>
         <dependency>
