@@ -43,6 +43,8 @@ public class WebConfiguration implements WebMvcConfigurer {
     protected final List<ResourceHandlerInnerHelper> resourceHandlerInnerHelpers = Lists.newArrayList();
 
     @Autowired
+    protected IAppProperties appProperties;
+    @Autowired
     protected ApplicationProperties applicationProperties;
 
     /**
@@ -93,9 +95,6 @@ public class WebConfiguration implements WebMvcConfigurer {
                     ArrayUtils.toString(resourceHandler.getResourceLocations()));
         }
     }
-
-    @Autowired
-    protected IAppProperties appProperties;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
