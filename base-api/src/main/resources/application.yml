@@ -13,9 +13,9 @@ server:
       enabled: true
       encoding: UTF-8
   error:
+    include-exception: true
     include-message: always
     include-binding-errors: always
-    include-exception: true
 
 spring:
   #  profiles:

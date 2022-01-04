@@ -1,8 +1,9 @@
 package com.tynet.saas.common.util;
 
 import java.math.BigDecimal;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -37,17 +38,36 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
             strValue = ((Double) value).toString();
         } else if (value instanceof Boolean) {
             strValue = ((Boolean) value).toString();
+        } else if (value instanceof Date) {
+            strValue = DateUtils.format((Date) value);
+        } else if (value instanceof LocalDateTime) {
+            strValue = DateUtils.format((LocalDateTime) value);
+        } else if (value instanceof LocalDate) {
+            strValue = DateUtils.format((LocalDate) value);
+        } else if (value instanceof LocalTime) {
+            strValue = DateUtils.format((LocalTime) value);
         } else if (value.getClass().isArray()) {
             // 基本数据类型处理...
             if (value instanceof char[]) {
                 strValue = Arrays.toString((char[]) value);
+            } else if (value instanceof long[]) {
+                strValue = Arrays.toString((long[]) value);
+            } else if (value instanceof int[]) {
+                strValue = Arrays.toString((int[]) value);
+            } else if (value instanceof short[]) {
+                strValue = Arrays.toString((short[]) value);
+            } else if (value instanceof byte[]) {
+                strValue = Arrays.toString((byte[]) value);
+            } else if (value instanceof boolean[]) {
+                strValue = Arrays.toString((boolean[]) value);
+            } else if (value instanceof float[]) {
+                strValue = Arrays.toString((float[]) value);
+            } else if (value instanceof double[]) {
+                strValue = Arrays.toString((double[]) value);
             } else {
-                strValue = Arrays.toString((Object[]) value);
+                // 对象数组
+                strValue = Arrays.deepToString((Object[]) value);
             }
-        } else if (value instanceof Date) {
-            DateFormat format = new SimpleDateFormat(DateUtils.DATE_TIME_PATTERN);
-            format.setTimeZone(DateUtils.DEFAULT_TIME_ZONE);
-            strValue = format.format((Date) value);
         } else {
             strValue = value.toString();
         }
@@ -119,5 +139,11 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     public static void main(String[] args) {
         System.out.println(format("{}{}_JoeyBling_Blog:{}",
                 new Date(), "周思伟", "https://zhousiwei.gitee.io/ibooks/"));
+
+        System.out.println(toString(new Date()));
+        System.out.println(toString(LocalDateTime.now()));
+        System.out.println(toString(LocalDate.now()));
+        System.out.println(toString(LocalTime.now()));
+        System.out.println(toString("just_test".toCharArray()));
     }
 }

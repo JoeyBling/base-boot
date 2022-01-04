@@ -89,8 +89,6 @@ public class SimpleByteWrapper extends ByteWrapperAdapter
      * just test
      */
     public static void main(String[] args) throws IOException {
-        System.out.println(StringUtils.toString("just_test".toCharArray()));
-
         System.out.println(new SimpleByteWrapper("just_test".toCharArray()));
         System.out.println(new SimpleByteWrapper("just_test"));
         System.out.println(new SimpleByteWrapper(new SimpleByteWrapper("just_test")));
