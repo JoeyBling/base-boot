@@ -13,7 +13,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.ConfigurationPropertiesBinding;
-import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpMethod;
@@ -119,12 +118,6 @@ public class ApplicationProperties extends IAppPropertiesAdapter implements ISta
     @Override
     public boolean isDebugMode() {
         return Boolean.TRUE.equals(debug);
-    }
-
-    @Deprecated
-    @DeprecatedConfigurationProperty(reason = "暂时弃用")
-    public String getUrl() {
-        return url;
     }
 
     @Override

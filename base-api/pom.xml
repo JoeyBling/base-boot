@@ -21,12 +21,10 @@
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
             <artifactId>base-core</artifactId>
-            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
             <artifactId>base-pojo</artifactId>
-            <version>${project.parent.version}</version>
         </dependency>
         <!-- 在yml中读取pom.xml配置使用 -->
         <dependency>

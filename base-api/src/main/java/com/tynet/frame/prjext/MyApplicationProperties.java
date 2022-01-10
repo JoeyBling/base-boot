@@ -4,8 +4,10 @@ import com.tynet.saas.common.hessian.IStartUp;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Getter;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.ConfigurationPropertiesBinding;
+import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
@@ -35,6 +37,19 @@ public class MyApplicationProperties implements IStartUp {
      */
     @NotNull
     private long sequenceWorkId;
+
+    /**
+     * 仅仅测试
+     */
+    @Nullable
+    @Deprecated
+    private String testStr;
+
+    @Deprecated
+    @DeprecatedConfigurationProperty(reason = "暂时弃用")
+    public String getTestStr() {
+        return testStr;
+    }
 
     @Override
     public void startUp() throws Exception {

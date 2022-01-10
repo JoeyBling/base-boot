@@ -43,13 +43,21 @@
 
         <!-- core version -->
         <cglib.version>3.3.0</cglib.version>
+        <mybatis.version>3.5.9</mybatis.version>
+        <mybatis-spring.version>2.0.6</mybatis-spring.version>
+        <mybatis-spring-boot.version>2.2.1</mybatis-spring-boot.version>
+        <mapper-spring-boot.version>2.1.5</mapper-spring-boot.version>
+        <pagehelper-spring-boot.version>1.4.1</pagehelper-spring-boot.version>
+        <orderbyhelper-spring-boot.version>1.0.2</orderbyhelper-spring-boot.version>
+        <!-- 校验连接错误：`druid.mysql.usePingMethod` - https://github.com/alibaba/druid/issues/3873 -->
+        <druid-spring-boot.version>1.2.8</druid-spring-boot.version>
+
+        <!--
         <mybatis.version>3.5.4</mybatis.version>
         <mybatis-spring.version>2.0.4</mybatis-spring.version>
-        <mapper-spring-boot.version>2.1.5</mapper-spring-boot.version>
         <pagehelper-spring-boot.version>1.2.13</pagehelper-spring-boot.version>
-        <orderby-helper.version>0.0.2</orderby-helper.version>
         <pagehelper.version>5.1.11</pagehelper.version>
-        <druid-spring-boot.version>1.2.8</druid-spring-boot.version>
+        -->
 
         <!-- common tools version -->
         <commons-lang3.version>3.12.0</commons-lang3.version>
@@ -67,7 +75,7 @@
         <jsoup.version>1.14.3</jsoup.version>
 
         <!-- 诊断工具 -->
-        <arthas-spring-boot.version>3.5.4</arthas-spring-boot.version>
+        <arthas-spring-boot.version>3.5.5</arthas-spring-boot.version>
 
         <!-- private tools version - 特扬 -->
         <!--<tynet.wechat4j-repeater.version>2.0.2-SNAPSHOT</tynet.wechat4j-repeater.version>-->
@@ -91,6 +99,22 @@
                 <version>${project.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <!-- 本地模块 -->
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>base-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>base-pojo</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>base-api</artifactId>
+                <version>${project.version}</version>
             </dependency>
             <!-- poi office -->
             <dependency>
@@ -128,6 +152,59 @@
                 <artifactId>druid-spring-boot-starter</artifactId>
                 <version>${druid-spring-boot.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-spring</artifactId>
+                <version>${mybatis-spring.version}</version>
+            </dependency>
+            <!-- https://github.com/mybatis/spring-boot-starter -->
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis-spring-boot.version}</version>
+            </dependency>
+            <!-- 通用Mapper - https://github.com/abel533/Mapper -->
+            <dependency>
+                <groupId>tk.mybatis</groupId>
+                <artifactId>mapper-spring-boot-starter</artifactId>
+                <version>${mapper-spring-boot.version}</version>
+                <exclusions>
+                    <!-- https://stackoverflow.com/q/60021815/8470159 -->
+                    <exclusion>
+                        <groupId>javax.persistence</groupId>
+                        <artifactId>persistence-api</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <!-- 分页拦截器 -->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper-spring-boot.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.mybatis.spring.boot</groupId>
+                        <artifactId>mybatis-spring-boot-starter</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <!-- 排序插件 - https://github.com/cuisongliu/orderbyhelper-boot-starter -->
+            <dependency>
+                <groupId>com.cuisongliu</groupId>
+                <artifactId>orderbyhelper-spring-boot-starter</artifactId>
+                <version>${orderbyhelper-spring-boot.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>com.github.jsqlparser</groupId>
+                        <artifactId>jsqlparser</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -137,7 +214,6 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>base-common</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.jetbrains</groupId>

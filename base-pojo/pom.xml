@@ -13,6 +13,20 @@
 
     <!-- 构建管理 -->
     <build>
+        <resources>
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+                <includes>
+                    <include>**/**</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>${basedir}/src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <!-- 源码 -->
@@ -43,7 +57,6 @@
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
             <artifactId>base-core</artifactId>
-            <version>${project.parent.version}</version>
             <optional>true</optional>
         </dependency>
         <!-- apache 工具包 -->

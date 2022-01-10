@@ -93,11 +93,27 @@ spring:
     # 覆盖已存在的任务
     overwrite-existing-jobs: true
 
+# mybatis
+mybatis:
+  mapper-locations:
+    - classpath*:/mapper/**/*.xml
+  type-aliases-package: com.tynet.module.**.model,com.tynet.module.**.domain
+  type-aliases-super-type: com.tynet.frame.prj.model.Entity
+  configuration:
+    map-underscore-to-camel-case: true
+    log-prefix: bootplus.dao.
+
 # mybatis-mapper
 mapper:
-  #  not-empty: true
   mappers:
-#    - tk.mybatis.mapper.common.Mapper
+    - tk.mybatis.mapper.common.Mapper
+  #    - com.tynet.frame.core.mybatis.mapper.MySQLCURDMapper
+  # not-empty: true
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
 
 management:
   endpoint:
@@ -149,7 +165,7 @@ application:
       thread-name-prefix: ${application.name:zhousiwei}-task-
   mvc:
     view-resolvers:
-      - { urlPath: '/',viewName: 'redirect:/app' }
+      - { urlPath: '/', viewName: 'redirect:/app' }
     cors:
       - path-pattern: /**
         allowCredentials: true

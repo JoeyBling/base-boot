@@ -23,7 +23,14 @@ import java.util.Objects;
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 @EnableScheduling
 @ServletComponentScan
-@SpringBootApplication
+@tk.mybatis.spring.annotation.MapperScan({
+        "com.tynet.**.dao",
+        "com.tynet.**.mapper",
+})
+@SpringBootApplication(exclude = {
+}, excludeName = {
+        // "org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration",
+})
 public class App extends SpringBootServletInitializer {
 
     /**
@@ -47,6 +54,17 @@ public class App extends SpringBootServletInitializer {
         final ApplicationContext applicationContext = app.run(args);
         System.out.println(
                 String.format("Run the Spring application = [%s]", Objects.toString(applicationContext)));
+    }
+
+    /**
+     * fix : No MyBatis mapper was found in '[xx.mapper]' package. Please check your configuration.
+     *
+     * @see org.mybatis.spring.mapper.ClassPathMapperScanner#doScan
+     * @deprecated tk-mapper与mybatis-starter的冲突
+     */
+    // @org.apache.ibatis.annotations.Mapper
+    @Deprecated
+    public interface NoWarnMapper {
     }
 
 }

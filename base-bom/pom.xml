@@ -34,6 +34,17 @@
     <!-- 依赖管理 -->
     <dependencyManagement>
         <dependencies>
+            <!-- 基础模块 -->
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>base-common</artifactId>
+                <version>${base.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>base-sdk</artifactId>
+                <version>${base.version}</version>
+            </dependency>
             <!-- 代码检查 -->
             <dependency>
                 <groupId>org.jetbrains</groupId>
