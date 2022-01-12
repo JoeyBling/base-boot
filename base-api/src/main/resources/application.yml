@@ -103,6 +103,17 @@ mybatis:
     map-underscore-to-camel-case: true
     log-prefix: bootplus.dao.
 
+# MyBatis-Plus
+mybatis-plus:
+  type-aliases-package: ${mybatis.type-aliases-package:}
+  type-aliases-super-type: ${mybatis.type-aliases-super-type:}
+  configuration:
+    map-underscore-to-camel-case: true
+    log-prefix: bootplus.dao.
+  global-config:
+    db-config:
+      table-underline: true
+
 # mybatis-mapper
 mapper:
   mappers:

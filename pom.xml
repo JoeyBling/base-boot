@@ -46,6 +46,7 @@
         <mybatis.version>3.5.9</mybatis.version>
         <mybatis-spring.version>2.0.6</mybatis-spring.version>
         <mybatis-spring-boot.version>2.2.1</mybatis-spring-boot.version>
+        <mybatis-plus-spring-boot.version>3.5.0</mybatis-plus-spring-boot.version>
         <mapper-spring-boot.version>2.1.5</mapper-spring-boot.version>
         <pagehelper-spring-boot.version>1.4.1</pagehelper-spring-boot.version>
         <orderbyhelper-spring-boot.version>1.0.2</orderbyhelper-spring-boot.version>
@@ -167,6 +168,12 @@
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>${mybatis-spring-boot.version}</version>
+            </dependency>
+            <!-- MyBatis-Plus -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus-spring-boot.version}</version>
             </dependency>
             <!-- 通用Mapper - https://github.com/abel533/Mapper -->
             <dependency>

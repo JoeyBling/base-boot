@@ -23,10 +23,10 @@ import java.util.Objects;
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 @EnableScheduling
 @ServletComponentScan
-@tk.mybatis.spring.annotation.MapperScan({
+/*@tk.mybatis.spring.annotation.MapperScan({
         "com.tynet.**.dao",
         "com.tynet.**.mapper",
-})
+})*/
 @SpringBootApplication(exclude = {
 }, excludeName = {
         // "org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration",
