@@ -137,13 +137,13 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
      * just test
      */
     public static void main(String[] args) {
-        System.out.println(format("{}{}_JoeyBling_Blog:{}",
+        System.out.println(format("{}-{}_JoeyBling_Blog:{}",
                 new Date(), "周思伟", "https://zhousiwei.gitee.io/ibooks/"));
 
         System.out.println(toString(new Date()));
-        System.out.println(toString(LocalDateTime.now()));
-        System.out.println(toString(LocalDate.now()));
-        System.out.println(toString(LocalTime.now()));
+        System.out.println(toString(DateUtils.now()));
+        System.out.println(toString(DateUtils.nowDate()));
+        System.out.println(toString(DateUtils.nowTime()));
         System.out.println(toString("just_test".toCharArray()));
     }
 }

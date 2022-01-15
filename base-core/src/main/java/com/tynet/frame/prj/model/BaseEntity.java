@@ -53,4 +53,5 @@ public abstract class BaseEntity implements Entity {
     public boolean isNew() {
         return StringUtils.isBlank(id);
     }
+
 }

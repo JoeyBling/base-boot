@@ -1,0 +1,11 @@
+# mybatis-mapper
+mapper:
+  mappers:
+    - tk.mybatis.mapper.common.Mapper
+    # - com.tynet.frame.core.mybatis.mapper.MySQLCURDMapper
+  # not-empty: true
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true

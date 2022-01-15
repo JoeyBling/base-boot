@@ -101,7 +101,7 @@ mybatis:
   type-aliases-super-type: com.tynet.frame.prj.model.Entity
   configuration:
     map-underscore-to-camel-case: true
-    log-prefix: bootplus.dao.
+    # log-prefix: bootplus.dao.
 
 # MyBatis-Plus
 mybatis-plus:
@@ -109,22 +109,10 @@ mybatis-plus:
   type-aliases-super-type: ${mybatis.type-aliases-super-type:}
   configuration:
     map-underscore-to-camel-case: true
-    log-prefix: bootplus.dao.
+    # log-prefix: bootplus.dao.
   global-config:
     db-config:
       table-underline: true
-
-# mybatis-mapper
-mapper:
-  mappers:
-    - tk.mybatis.mapper.common.Mapper
-  #    - com.tynet.frame.core.mybatis.mapper.MySQLCURDMapper
-  # not-empty: true
-
-pagehelper:
-  helperDialect: mysql
-  reasonable: true
-  supportMethodsArguments: true
 
 management:
   endpoint:
