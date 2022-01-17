@@ -22,6 +22,7 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotBlank;
 import java.io.IOException;
+import java.io.Serializable;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.Collections;
@@ -101,7 +102,7 @@ public class ApplicationProperties extends IAppPropertiesAdapter implements ISta
      * 缓存配置
      */
     @NestedConfigurationProperty
-    private CacheConfig cacheConfig = new CacheConfig();
+    private CacheConfig cacheConfig = new ExtendCacheConfig();
 
     @NestedConfigurationProperty
     private Task task = new Task();
@@ -143,6 +144,20 @@ public class ApplicationProperties extends IAppPropertiesAdapter implements ISta
             throw ExceptionUtil.wrapRuntimeException(e);
         }
         Assert.isTrue(FileUtils.getFile(this.getStoragePath()).exists(), "本地存储根路径必须存在");
+    }
+
+    /**
+     * 自定义配置扩展
+     */
+    @Data
+    public static class ExtendCacheConfig extends CacheConfig implements Serializable {
+        private static final long serialVersionUID = 1L;
+
+        /**
+         * 缓存前缀
+         */
+        private String cachePrefix;
+
     }
 
     /**

@@ -1,16 +1,24 @@
 package com.tynet.config;
 
+import com.google.common.base.Supplier;
+import com.google.common.base.Suppliers;
 import com.tynet.frame.prj.ApplicationProperties;
 import com.tynet.frame.prjext.MyApplicationProperties;
 import com.tynet.saas.common.hessian.IAppProperties;
 import com.tynet.saas.common.service.ICipherService;
+import com.tynet.saas.common.service.adapter.IAppPropertiesAdapter;
 import com.tynet.saas.common.service.impl.MD5CipherService;
 import com.tynet.saas.common.service.impl.NoOpCipherService;
 import com.tynet.saas.common.service.impl.SM4CipherService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * 自定义程序配置
@@ -19,6 +27,7 @@ import org.springframework.context.annotation.Primary;
  */
 @Configuration
 public class MyBootConfig {
+    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
      * 程序配置属性
@@ -27,21 +36,49 @@ public class MyBootConfig {
      * </p>
      */
     @Bean
+    @Primary
     @ConditionalOnMissingBean
     public ApplicationProperties applicationProperties() {
         return new ApplicationProperties();
     }
 
     /**
+     * 默认{@link IAppProperties}实现
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    public IAppProperties defaultAppProperties() {
+        logger.warn("未检测到程序配置接口实现，适配默认实现...");
+        return new IAppPropertiesAdapter() {
+            /**
+             * 默认单例实现
+             * <p>
+             * {@link com.google.common.base.Suppliers}
+             * {@link org.springframework.util.function.SingletonSupplier}
+             * </p>
+             */
+            protected final Supplier<? extends CacheConfig> DEFAULT_INSTANCE =
+                    Suppliers.memoize(CacheConfig::new);
+
+            @Override
+            public CacheConfig getCacheConfig() {
+                // 防止NPE
+                return Optional.ofNullable(super.getCacheConfig()).orElseGet(DEFAULT_INSTANCE);
+            }
+
+        };
+    }
+
+    /**
      * 缓存配置 - 方便引用
      *
-     * @param applicationProperties 程序配置
+     * @param appProperties 程序配置
      * @return {@link IAppProperties.CacheConfig}
      */
     @Bean
     @ConditionalOnMissingBean
-    public IAppProperties.CacheConfig cacheConfig(ApplicationProperties applicationProperties) {
-        return applicationProperties.getCacheConfig();
+    public IAppProperties.CacheConfig cacheConfig(IAppProperties appProperties) {
+        return Objects.requireNonNull(appProperties.getCacheConfig());
     }
 
     /**

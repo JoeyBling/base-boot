@@ -29,6 +29,8 @@ public class TestService extends ServiceImpl<TestMapper, Test>
 
     @Autowired
     protected IAppProperties appProperties;
+    @Autowired
+    private IAppProperties.CacheConfig cacheConfig;
 
     @Override
     public String getCacheName() {

@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -69,7 +70,7 @@ public class TestController {
         IResponse<?> response;
 
         try {
-            // Assert.hasText(json, "请求入参不能为空...");
+            Assert.hasText(json, "请求入参不能为空...");
 
             // 结果的提供者（注：不可重复调用消费，建议缓存）
             Supplier<IResponse<?>> responseSupplier = Lazy.of(() -> this.processRequest(json));

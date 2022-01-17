@@ -4,6 +4,7 @@ import lombok.Data;
 import org.apache.commons.io.FileUtils;
 
 import java.time.Duration;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -74,7 +75,7 @@ public interface IAppProperties {
         /**
          * 缓存对应的生存时间
          */
-        private Map<String, Duration> expireMap;
+        private Map<String, Duration> expireMap = new LinkedHashMap<>();
 
         /**
          * 获取缓存生存时间

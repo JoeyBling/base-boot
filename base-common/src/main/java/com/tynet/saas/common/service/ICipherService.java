@@ -62,6 +62,7 @@ public interface ICipherService {
      */
     @Deprecated
     default ByteWrapper decryptStr(String data) {
+        // 不做解码操作
         return this.decrypt(StrUtil.utf8Bytes(data));
     }
 

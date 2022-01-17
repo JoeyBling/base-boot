@@ -1,5 +1,6 @@
 package com.tynet.frame.prjext;
 
+import com.tynet.frame.prj.ApplicationProperties;
 import com.tynet.saas.common.hessian.IStartUp;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -30,7 +31,7 @@ public class MyApplicationProperties implements IStartUp {
     /**
      * 自定义程序配置属性前缀
      */
-    public final static String MY_PROPERTIES_PREFIX = "application.prj";
+    public static final String MY_PROPERTIES_PREFIX = ApplicationProperties.APPLICATION_CONFIG_PREFIX + ".prj";
 
     /**
      * 序列号生成的workId - 多机负载时需要修改

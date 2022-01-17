@@ -56,4 +56,5 @@ public abstract class IAppPropertiesAdapter implements IAppProperties {
     public CacheConfig getCacheConfig() {
         return null;
     }
+
 }

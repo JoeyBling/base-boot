@@ -153,6 +153,7 @@ application:
     # {@link java.time.Duration#parse}
     default-expire: PT60M
     expire-map: { SMARTHOS_TOKEN: PT24H, SMARTHOS_CONFIG: PT24H, SMARTHOS_CAPTCHA: PT10M }
+    cache-prefix: base
   # 定时任务配置
   task:
     # 自定义线程池配置
