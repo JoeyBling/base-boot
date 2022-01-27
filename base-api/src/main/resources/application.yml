@@ -92,6 +92,26 @@ spring:
   quartz:
     # 覆盖已存在的任务
     overwrite-existing-jobs: true
+  cache:
+    redis:
+#      time-to-live: PT60M
+      # 防止缓存穿透
+      cache-null-values: true
+      use-key-prefix: false
+  #      key-prefix: ${application.name:}
+#      enable-statistics: true
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: tywl123
+    database: 0
+    lettuce:
+      pool:
+        max-active: 50 # 最大连接数
+        max-wait: PT5S
+        max-idle: 50 # 连接池中最大空闲连接
+        min-idle: 5 # 连接池中最小空闲连接
+        time-between-eviction-runs: 1 # eviction线程调度时间间隔
 
 # mybatis
 mybatis:
@@ -150,10 +170,10 @@ application:
   domain: https://dev-saas.diandianys.com/
   storage-path: @project.basedir@
   cache-config:
-    # {@link java.time.Duration#parse}
+    # {@link java.time.Duration#parse} - {@link org.springframework.boot.convert.DurationStyle}
     default-expire: PT60M
-    expire-map: { SMARTHOS_TOKEN: PT24H, SMARTHOS_CONFIG: PT24H, SMARTHOS_CAPTCHA: PT10M }
-    cache-prefix: base
+    expire-map: { TEST: PT24H, SMARTHOS_TOKEN: PT24H, SMARTHOS_CONFIG: PT24H, SMARTHOS_CAPTCHA: PT10M }
+    cache-prefix: ${application.name:}
   # 定时任务配置
   task:
     # 自定义线程池配置
