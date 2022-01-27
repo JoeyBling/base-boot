@@ -146,11 +146,11 @@ public abstract class AbstractHttpRequest<T> extends SingletonInitializingBean {
         getLogger().debug("请求API接口：method=[{}],url=[{}],参数=[{}]",
                 httpRequest.getMethod(), httpRequest.getUrl(), bodyObj);
         // 计时
-        long startTime = DateUtils.currentTimeStamp();
+        long startTime = DateUtils.currentTimestamp();
         // 执行Request请求
         try (HttpResponse response = httpRequest.execute()) {
             // 接口请求耗时
-            String durationStr = (DateUtils.currentTimeStamp() - startTime) / 1000d + "s";
+            String durationStr = (DateUtils.currentTimestamp() - startTime) / 1000d + "s";
             // 响应主体
             String result = null;
             if (response.isOk()) {

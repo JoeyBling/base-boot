@@ -96,8 +96,13 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
      * @param dateTime 时间
      * @return long
      */
-    public static long getTimeStamp(@NotNull LocalDateTime dateTime) {
-        return dateTime.toInstant(DEFAULT_ZONE_OFFSET).toEpochMilli();
+    public static long getTimestamp(@NotNull LocalDateTime dateTime) {
+        /**
+         * {@link java.time.Instant#toEpochMilli()} - 毫秒数
+         * {@link java.time.Instant#getEpochSecond()} - 秒数
+         */
+        return dateTime.atZone(DEFAULT_ZONE_ID).toInstant().toEpochMilli();
+        // return dateTime.toInstant(DEFAULT_ZONE_OFFSET).toEpochMilli();
     }
 
     /**
@@ -106,8 +111,8 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
      * @param date 日期
      * @return long
      */
-    public static long getTimeStamp(@NotNull LocalDate date) {
-        return getTimeStamp(date.atStartOfDay());
+    public static long getTimestamp(@NotNull LocalDate date) {
+        return getTimestamp(date.atStartOfDay());
     }
 
     /**
@@ -115,18 +120,17 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
      *
      * @return long
      */
-    public static long currentTimeStamp() {
-        return getTimeStamp(now());
+    public static long currentTimestamp() {
+        return getTimestamp(now());
     }
 
     /**
      * 获取当前时间戳(秒级别)
      *
      * @return 当前时间戳
-     * @see #currentTimeStamp()
      */
-    public static long currentSecondTimeStamp() {
-        return currentTimeStamp() / 1000;
+    public static long currentSecondTimestamp() {
+        return currentTimestamp() / 1000;
     }
 
     /**

@@ -15,7 +15,7 @@ package com.tynet.saas.common.constant;
  *
  * @author Created by 思伟 on 2021/1/30
  */
-public class CacheManagerNameConstant {
+public class CacheManagerNameConst {
 
     /**
      * Redis
@@ -26,4 +26,5 @@ public class CacheManagerNameConstant {
      * EhCache
      */
     public static final String EHCACHE_CACHE_MANAGER = "ehCacheCacheManager";
+
 }

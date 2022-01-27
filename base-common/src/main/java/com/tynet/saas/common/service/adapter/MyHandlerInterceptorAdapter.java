@@ -33,4 +33,5 @@ public abstract class MyHandlerInterceptorAdapter implements MyHandlerIntercepto
             logger.debug("自定义拦截器[{}]初始化完成...", this.toString());
         }
     }
+
 }

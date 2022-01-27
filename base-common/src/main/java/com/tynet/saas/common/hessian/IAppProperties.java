@@ -87,6 +87,7 @@ public interface IAppProperties {
             // return this.expireMap.getOrDefault(name, this.defaultExpire);
             return Optional.ofNullable(this.expireMap.get(name)).orElse(this.defaultExpire);
         }
+
     }
 
 }

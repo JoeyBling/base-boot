@@ -104,8 +104,11 @@ public class FileUtils extends org.apache.commons.io.FileUtils {
      * @return 临时 {@code File}
      */
     public static File getTempFile(final InputStream source, String fileRelativePath) throws IOException {
-        final String tempOutFilePath = generateFileUrl(getTempDirectoryPath(),
-                Optional.ofNullable(fileRelativePath).orElse(StringUtils.toString(DateUtils.currentSecondTimeStamp())));
+        final String tempOutFilePath = generateFileUrl(
+                getTempDirectoryPath(),
+                Optional.ofNullable(fileRelativePath)
+                        .orElse(StringUtils.toString(DateUtils.currentSecondTimestamp()))
+        );
         final File destination = new File(tempOutFilePath);
         copyInputStreamToFile(source, destination);
         return destination;

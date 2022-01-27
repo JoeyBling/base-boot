@@ -62,7 +62,6 @@ public class TimeIt {
      * @throws Exception
      */
     public static <V> V printTime(Callable<V> callable, String message, Logger logger) throws Exception {
-        // 获取当前时间戳 {@code DateUtils.currentTimeStamp()}
         Objects.requireNonNull(callable, "callable is null");
         long startTime = System.currentTimeMillis();
         V call = callable.call();

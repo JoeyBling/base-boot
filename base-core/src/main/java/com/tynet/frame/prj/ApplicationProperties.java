@@ -54,7 +54,7 @@ public class ApplicationProperties extends IAppPropertiesAdapter implements ISta
     /**
      * 启动时间戳
      */
-    static final long START_UP_TIMESTAMP = DateUtils.currentTimeStamp();
+    static final long START_UP_TIMESTAMP = DateUtils.currentTimestamp();
 
     /**
      * 调试模式
@@ -102,7 +102,7 @@ public class ApplicationProperties extends IAppPropertiesAdapter implements ISta
      * 缓存配置
      */
     @NestedConfigurationProperty
-    private CacheConfig cacheConfig = new ExtendCacheConfig();
+    private ExtendCacheConfig cacheConfig = new ExtendCacheConfig();
 
     @NestedConfigurationProperty
     private Task task = new Task();

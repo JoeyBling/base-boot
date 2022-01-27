@@ -65,14 +65,14 @@ public class Lazy<T> implements Supplier<T> {
         log.debug("test: {}", of(of(() -> 111)));
         log.debug("test: {}", of(of(() -> null)));
         long beginTime = System.currentTimeMillis();
-        log.debug("{}", of(() -> (DateUtils.currentTimeStamp() - beginTime) / 1000 + "s"));
+        log.debug("{}", of(() -> (DateUtils.currentTimestamp() - beginTime) / 1000 + "s"));
         // 如果普通入参，则会进行调用方法。不推荐(如果对象很大或方法执行慢，容易造成性能问题)
-        log.trace("invoke remote method, return value: {}", DateUtils.currentSecondTimeStamp());
+        log.trace("invoke remote method, return value: {}", DateUtils.currentSecondTimestamp());
         // 延迟执行，如果日志等级不够，则不会进行计算
-        log.trace("invoke remote method, return value: {}", of(DateUtils::currentSecondTimeStamp));
-        log.trace("invoke remote method, return value: {}", of(DateUtils::currentSecondTimeStamp).get());
+        log.trace("invoke remote method, return value: {}", of(DateUtils::currentSecondTimestamp));
+        log.trace("invoke remote method, return value: {}", of(DateUtils::currentSecondTimestamp).get());
         log.debug("invoke remote method, return value: {}", of(() -> null));
-        log.debug("invoke remote method, return value: {}", of(DateUtils::currentSecondTimeStamp));
+        log.debug("invoke remote method, return value: {}", of(DateUtils::currentSecondTimestamp));
     }
 
 }

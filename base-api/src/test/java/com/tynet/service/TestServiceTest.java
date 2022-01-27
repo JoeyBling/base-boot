@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Created by 思伟 on 2022/1/12
  */
 @Transactional
-class TestServiceTest extends BaseAppTest {
+public class TestServiceTest extends BaseAppTest {
 
     @Autowired
     private TestService testService;

@@ -15,7 +15,7 @@
         <!-- main version setting -->
         <lombok.version>1.18.22</lombok.version>
         <junit-jupiter.version>5.8.2</junit-jupiter.version>
-        <slf4j.version>1.7.32</slf4j.version>
+        <slf4j.version>1.7.33</slf4j.version>
         <logback.version>1.2.10</logback.version>
         <log4j2.version>2.17.1</log4j2.version>
         <!-- 基础配置 -->

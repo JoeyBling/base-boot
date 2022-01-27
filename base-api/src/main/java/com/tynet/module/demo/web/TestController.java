@@ -56,7 +56,7 @@ public class TestController {
     public Object request(HttpServletRequest servletRequest, HttpServletResponse servletResponse,
                           @RequestBody(required = false) String json) {
         // 计时
-        final long startTime = DateUtils.currentTimeStamp();
+        final long startTime = DateUtils.currentTimestamp();
         // 从request中获取请求参数
         final Map<String, String> map = servletRequest.getParameterMap()
                 .entrySet()
@@ -90,7 +90,7 @@ public class TestController {
         // response = new SimpleResponseDecorator<>(response);
 
         // 接口请求耗时
-        String durationStr = (DateUtils.currentTimeStamp() - startTime) / 1000d + "s";
+        String durationStr = (DateUtils.currentTimestamp() - startTime) / 1000d + "s";
         logger.debug("[{}] - 访问：method=[{}],url=[{}],参数=[{}],入参=[{}],耗时[{}],响应数据=[{}]",
                 this.getServiceName(),
                 servletRequest.getMethod(), servletRequest.getRequestURI(), json, map, durationStr, response);

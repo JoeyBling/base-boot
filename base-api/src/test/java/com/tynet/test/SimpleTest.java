@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.Duration;
+
 /**
  * 简单测试
  *
@@ -19,10 +21,11 @@ public class SimpleTest {
     @Test
     public void baseTest() {
         // 当前时间戳
-        final long currentTimeStamp = DateUtils.currentTimeStamp();
-        logger.debug("{}-{}-{}", currentTimeStamp,
-                DateUtils.getTimeStamp(DateUtils.nowDate()),
-                DateUtils.of(currentTimeStamp));
+        final long currentTimestamp = DateUtils.currentTimestamp();
+        logger.debug("{}-{}-{}", currentTimestamp,
+                DateUtils.getTimestamp(DateUtils.nowDate()),
+                DateUtils.of(currentTimestamp));
+        logger.debug("{}-{}", Duration.ZERO, Duration.parse(Duration.ZERO.toString()));
     }
 
     /**
