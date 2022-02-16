@@ -43,6 +43,8 @@ JAVA_OPTS="$JAVA_OPTS -Dloader.path=libs -Dspring.profiles.active=${PROFILES}"
 
 # Spring运行参数
 SPRING_OPTS="--application.log.level=DEBUG --spring.profiles.active=${PROFILES}"
+# 应用程序的上下文路径
+SPRING_OPTS="$SPRING_OPTS --server.servlet.context-path=/boot"
 
 # 停止程序等待时间(秒)
 SHUTDOWN_WAIT_SECONDS=20
