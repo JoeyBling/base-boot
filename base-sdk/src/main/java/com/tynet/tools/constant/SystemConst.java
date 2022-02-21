@@ -1,4 +1,4 @@
-package com.tynet.base.constant;
+package com.tynet.tools.constant;
 
 import java.math.BigDecimal;
 import java.nio.charset.Charset;

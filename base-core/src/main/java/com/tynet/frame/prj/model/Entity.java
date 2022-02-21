@@ -22,4 +22,5 @@ public interface Entity extends Serializable {
      * @return boolean
      */
     boolean isNew();
+
 }

@@ -2,6 +2,7 @@ package com.tynet.frame.prj.model;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.tynet.frame.core.annotation.Enabled;
 import com.tynet.saas.common.constant.ResponseCodeConst;
 import com.tynet.saas.common.exception.SysRuntimeException;
 import com.tynet.saas.common.util.StringUtils;
@@ -33,7 +34,7 @@ public abstract class BaseEntity implements Entity {
     /**
      * 是否有效
      */
-    // @Enabled
+    @Enabled
     @Column(name = "enabled")
     @JSONField(serialize = false)
     @JsonIgnore

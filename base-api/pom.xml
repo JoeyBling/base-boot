@@ -26,12 +26,6 @@
             <groupId>${project.parent.groupId}</groupId>
             <artifactId>base-pojo</artifactId>
         </dependency>
-        <!-- 仅仅测试 -->
-        <dependency>
-            <groupId>${project.parent.groupId}</groupId>
-            <artifactId>base-sdk</artifactId>
-            <scope>test</scope>
-        </dependency>
         <!-- 在yml中读取pom.xml配置使用 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
