@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import java.time.Duration;
 import java.util.Map;
@@ -22,11 +23,13 @@ import java.util.stream.Collectors;
 public class CacheTest extends BaseAppTest {
 
     @Autowired
-    protected IAppProperties appProperties;
-    @Autowired
     protected CacheManager cacheManager;
     @Autowired
+    protected IAppProperties appProperties;
+    @Autowired
     private ObjectProvider<ICacheService> cacheServices;
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
     @Autowired
     private CacheTestService cacheTestService;
 
@@ -35,17 +38,17 @@ public class CacheTest extends BaseAppTest {
      */
     @Test
     public void baseTest() {
+        logger.debug("-----Spring缓存配置-----");
+        logger.debug("当前缓存管理器：{}", cacheManager);
+        for (String cacheName : cacheManager.getCacheNames()) {
+            logger.debug("缓存名称：{}", cacheName);
+        }
+
         final IAppProperties.CacheConfig cacheConfig = appProperties.getCacheConfig();
         logger.debug("-----本地缓存配置-----");
         logger.debug("默认生存时间：{}", cacheConfig.getDefaultExpire());
         for (Map.Entry<String, Duration> entry : cacheConfig.getExpireMap().entrySet()) {
             logger.debug("缓存名称：{}，生存时间：{}", entry.getKey(), entry.getValue());
-        }
-
-        logger.debug("-----Spring缓存配置-----");
-        logger.debug("当前缓存管理器：{}", cacheManager);
-        for (String cacheName : cacheManager.getCacheNames()) {
-            logger.debug("缓存名称：{}", cacheName);
         }
 
         logger.debug("-----自定义缓存接口实现-----");
@@ -63,6 +66,8 @@ public class CacheTest extends BaseAppTest {
         final String cacheKey = "zhousiwei";
         // 缓存空值
         Assertions.assertNull(cacheTestService.cacheNullVal(cacheKey));
+        // 删除所有缓存
+        cacheTestService.clearAll();
     }
 
 }

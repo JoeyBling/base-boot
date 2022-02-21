@@ -94,12 +94,11 @@ spring:
     overwrite-existing-jobs: true
   cache:
     redis:
-#      time-to-live: PT60M
       # 防止缓存穿透
       cache-null-values: true
       use-key-prefix: false
-  #      key-prefix: ${application.name:}
-#      enable-statistics: true
+      #      key-prefix: ${application.name:}
+      enable-statistics: true
   redis:
     host: 127.0.0.1
     port: 6379
@@ -147,11 +146,14 @@ management:
   endpoints:
     web:
       exposure:
+        # {@link org.springframework.boot.actuate.endpoint.annotation.Endpoint}
         include:
           - health
           - info
           - env
           - beans
+          - metrics
+          - caches
           - arthas
 
 arthas:

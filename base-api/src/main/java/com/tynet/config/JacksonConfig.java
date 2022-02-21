@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Jackson配置
+ * {@literal Jackson}配置
  *
  * @author Created by 思伟 on 2022/1/14
  */

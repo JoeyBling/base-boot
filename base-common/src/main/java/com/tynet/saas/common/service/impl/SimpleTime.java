@@ -5,7 +5,7 @@ import com.tynet.saas.common.service.ITime;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 简单时间接口实现
+ * 简单{@link ITime}实现
  *
  * @author Created by 思伟 on 2021/9/9
  */

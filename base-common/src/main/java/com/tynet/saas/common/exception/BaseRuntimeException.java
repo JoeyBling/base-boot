@@ -1,5 +1,7 @@
 package com.tynet.saas.common.exception;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tynet.saas.common.util.StringUtils;
 
 /**
@@ -36,7 +38,13 @@ public abstract class BaseRuntimeException extends RuntimeException implements M
         return super.getMessage();
     }
 
+    /**
+     * {@inheritDoc}
+     * <p>防止自引用循环.
+     */
     @Override
+    @JSONField(serialize = false, deserialize = false)
+    @JsonIgnore
     public Throwable getException() {
         return this;
         // return Optional.ofNullable(this.getCause()).orElse(this);

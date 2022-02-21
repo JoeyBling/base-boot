@@ -45,40 +45,6 @@ public abstract class AbstractHttpRequest<T> extends SingletonInitializingBean {
     }
 
     /**
-     * 获取日志记录器
-     * <p>Defaults {@link #INNER_LOGGER}
-     *
-     * @return {@code org.slf4j.Logger}
-     */
-    protected final Logger getLogger() {
-        if (null == INNER_LOGGER) {
-            synchronized (this) {
-                // 双检锁/双重校验锁
-                if (null == INNER_LOGGER) {
-                    INNER_LOGGER = LoggerFactory.getLogger(this.getClass());
-                    if (null != INNER_LOGGER) {
-                        INNER_LOGGER = decorateLogger(INNER_LOGGER);
-                    }
-                }
-            }
-        }
-        return INNER_LOGGER;
-    }
-
-    /**
-     * 装饰给定的日志对象
-     * <p>
-     * 子类如果要重写，建议主动声明再次调用父类一次，否则日志前缀会忽略打印
-     * </p>
-     *
-     * @param logger 日志对象
-     * @return 装饰后的对象
-     */
-    protected Logger decorateLogger(Logger logger) {
-        return new PrefixSlfLoggerDecorator(logger, this.getLogPrefix());
-    }
-
-    /**
      * 获取服务名
      *
      * @return String
@@ -110,7 +76,7 @@ public abstract class AbstractHttpRequest<T> extends SingletonInitializingBean {
      * @param headers     请求头
      * @param contentType 内容编码类型
      * @param acceptType  接收编码类型
-     * @return IResponse
+     * @return {@link IResponse}
      */
     protected @NotNull IResponse<T> sendRequest(final String reqUrl, final Method method,
                                                 final Object bodyObj, Map<String, String> headers,
@@ -164,7 +130,7 @@ public abstract class AbstractHttpRequest<T> extends SingletonInitializingBean {
         } catch (Throwable e) {
             /**
              * {@link cn.hutool.core.io.IORuntimeException} 连接超时
-             * {@link HttpException}
+             * {@link cn.hutool.http.HttpException}
              */
             throw new SysRuntimeException(ResponseCodeConst.ERROR_SYSTEM,
                     StringUtils.format("[{}]请求API接口失败,e={}", this.getServiceName(), e.getMessage()));
@@ -195,7 +161,7 @@ public abstract class AbstractHttpRequest<T> extends SingletonInitializingBean {
      * {@link org.springframework.http.MediaType}
      * </p>
      *
-     * @return {@link ContentType}
+     * @return {@link cn.hutool.http.ContentType}
      */
     protected String getDefaultContentType() {
         return ContentType.JSON.toString(SystemConst.DEFAULT_CHARSET);
@@ -204,7 +170,7 @@ public abstract class AbstractHttpRequest<T> extends SingletonInitializingBean {
     /**
      * 获取全局默认接收编码类型
      *
-     * @return {@link ContentType}
+     * @return {@link cn.hutool.http.ContentType}
      */
     protected String getDefaultAcceptType() {
         return ContentType.JSON.toString(SystemConst.DEFAULT_CHARSET);
@@ -262,13 +228,48 @@ public abstract class AbstractHttpRequest<T> extends SingletonInitializingBean {
     }
 
     /**
+     * 获取日志记录器
+     * <p>Defaults {@link #INNER_LOGGER}
+     *
+     * @return {@link org.slf4j.Logger}
+     */
+    protected final Logger getLogger() {
+        if (null == INNER_LOGGER) {
+            synchronized (this) {
+                // 双检锁/双重校验锁
+                if (null == INNER_LOGGER) {
+                    INNER_LOGGER = LoggerFactory.getLogger(this.getClass());
+                    if (null != INNER_LOGGER) {
+                        INNER_LOGGER = decorateLogger(INNER_LOGGER);
+                    }
+                }
+            }
+        }
+        return INNER_LOGGER;
+    }
+
+    /**
+     * 装饰给定的日志对象
+     * <p>
+     * 子类如果要重写，建议主动声明再次调用父类一次，否则日志前缀会忽略打印
+     * </p>
+     *
+     * @param logger 日志对象
+     * @return 装饰后的对象
+     */
+    protected Logger decorateLogger(Logger logger) {
+        return new PrefixSlfLoggerDecorator(logger, this.getLogPrefix());
+    }
+
+    /**
      * 默认日志记录器
      */
     private volatile Logger INNER_LOGGER = null;
+
     /**
      * API接口域名
      */
     @Getter
-    private String apiDomain;
+    private final String apiDomain;
 
 }
