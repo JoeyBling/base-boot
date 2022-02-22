@@ -76,7 +76,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
 
     /**
      * message格式化，用{}替代任何的对象
-     * 参考:{@link cn.hutool.core.util.StrUtil#format(CharSequence, Object...)}
+     * 参考：{@link cn.hutool.core.util.StrUtil#format}
      *
      * @param message 待格式化字符串
      * @param objs    入参
@@ -84,7 +84,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
      */
     public static String format(String message, Object... objs) {
         for (Object obj : objs) {
-            message = formatByStr(message, obj, "{}");
+            message = formatWith(message, obj, "{}");
         }
         return message;
     }
@@ -92,18 +92,18 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     /**
      * 使用指定的替换符进行格式化字符串
      *
-     * @param str       待格式化字符串
-     * @param obj       入参
-     * @param formatStr 格式化替换字符串(默认:{})
+     * @param str         待格式化字符串
+     * @param obj         入参
+     * @param placeHolder 占位符<p>Defaults {@literal {}}.
      * @return 格式化后的字符串
      */
-    public static String formatByStr(String str, Object obj, String formatStr) {
-        formatStr = defaultString(formatStr, "{}");
+    public static String formatWith(String str, Object obj, String placeHolder) {
+        placeHolder = defaultString(placeHolder, "{}");
         // 获取开始下标
-        int i = str.indexOf(formatStr);
+        int i = str.indexOf(placeHolder);
         if (i != -1) {
             return str.substring(0, i).concat(stripToEmpty(toString(obj)))
-                    .concat(str.substring(i + formatStr.length()));
+                    .concat(str.substring(i + placeHolder.length()));
         } else {
             // 跳过替换
             return str;
@@ -111,22 +111,20 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     }
 
     /**
-     * 转换为Integer类型
+     * 转换为{@link java.lang.Integer#TYPE}类型
      *
      * @param cs 待转换字符串
      * @return Integer
      */
     public static Integer getIntegerValue(CharSequence cs) {
-        // Integer.getInteger
         return isNumeric(cs) ? Integer.parseInt(cs.toString()) : null;
     }
 
     /**
-     * 转换为Integer类型，当输入的字符串不是一个整型类型时返回默认值
+     * 转换为{@link java.lang.Integer#TYPE}类型
      *
      * @param defaultInt 要返回的默认值
      *                   if the input is {@code null}, may be null
-     * @see #getIntegerValue(CharSequence)
      */
     public static Integer getIntegerValue(CharSequence cs, Integer defaultInt) {
         final Integer intVal = getIntegerValue(cs);
@@ -138,12 +136,17 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
      */
     public static void main(String[] args) {
         System.out.println(format("{}-{}_JoeyBling_Blog:{}",
-                new Date(), "周思伟", "https://zhousiwei.gitee.io/ibooks/"));
+                DateUtils.now(), "周思伟", "https://zhousiwei.gitee.io/ibooks/"));
 
         System.out.println(toString(new Date()));
         System.out.println(toString(DateUtils.now()));
         System.out.println(toString(DateUtils.nowDate()));
         System.out.println(toString(DateUtils.nowTime()));
         System.out.println(toString("just_test".toCharArray()));
+
+        System.out.println(toString(DateUtils.of(new Date())));
+        System.out.println(toString(DateUtils.toDate()));
+
     }
+
 }

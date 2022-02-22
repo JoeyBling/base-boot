@@ -2,12 +2,14 @@ package com.tynet.saas.common.util;
 
 import com.tynet.saas.common.constant.SystemConst;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.Optional;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
@@ -106,13 +108,24 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
     }
 
     /**
-     * 根据日期获取时间戳
+     * 获取时间戳
      *
      * @param date 日期
      * @return long
      */
     public static long getTimestamp(@NotNull LocalDate date) {
         return getTimestamp(date.atStartOfDay());
+    }
+
+    /**
+     * 获取时间戳
+     * <p>使用当前日期.
+     *
+     * @param time 时间
+     * @return long
+     */
+    public static long getTimestamp(@NotNull LocalTime time) {
+        return getTimestamp(time.atDate(nowDate()));
     }
 
     /**
@@ -134,33 +147,85 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
     }
 
     /**
+     * {@link Instant}转时间
+     *
+     * @param instant 时间点
+     * @param zoneId  时区ID<p>Defaults {@link ZoneId#systemDefault()}
+     * @return {@link LocalDateTime}
+     */
+    public static LocalDateTime of(Instant instant, @Nullable ZoneId zoneId) {
+        return LocalDateTime.ofInstant(instant, Optional.ofNullable(zoneId).orElseGet(ZoneId::systemDefault));
+    }
+
+    /**
+     * {@link Instant}转时间
+     * <p>使用默认时区.
+     */
+    public static LocalDateTime of(Instant instant) {
+        return of(instant, DEFAULT_ZONE_ID);
+    }
+
+    /**
      * 毫秒转时间
      *
      * @param epochMilli 毫秒
      * @return {@link LocalDateTime}
      */
     public static LocalDateTime of(long epochMilli) {
-        return LocalDateTime.ofInstant(Instant.ofEpochMilli(epochMilli), DEFAULT_ZONE_ID);
+        return of(Instant.ofEpochMilli(epochMilli));
     }
 
     /**
-     * 格式化日期
+     * {@link Date}转时间
      */
-    public static String format(Date date) {
-        return format(date, DATE_TIME_PATTERN);
+    public static LocalDateTime of(Date date) {
+        return of(date.toInstant());
     }
 
     /**
-     * 格式化日期
+     * 转{@link Date}
      *
-     * @param date    日期
-     * @param pattern 格式
-     * @return String
+     * @param dateTime 时间
+     * @param zoneId   时区ID<p>Defaults {@link ZoneId#systemDefault()}
+     * @return {@link Date}
      */
-    public static String format(Date date, String pattern) {
-        final DateFormat dateFormat = new SimpleDateFormat(pattern);
-        dateFormat.setTimeZone(DEFAULT_TIME_ZONE);
-        return dateFormat.format(date);
+    public static Date toDate(@NotNull LocalDateTime dateTime, @Nullable ZoneId zoneId) {
+        return Date.from(dateTime.atZone(
+                Optional.ofNullable(zoneId).orElseGet(ZoneId::systemDefault)
+        ).toInstant());
+    }
+
+    /**
+     * 转{@link Date}
+     * <p>使用默认时区.
+     */
+    public static Date toDate(LocalDateTime dateTime) {
+        return toDate(dateTime, DEFAULT_ZONE_ID);
+    }
+
+    /**
+     * 转{@link Date}
+     */
+    public static Date toDate() {
+        return toDate(now());
+    }
+
+    /**
+     * 解析日期时间
+     *
+     * @param text 要解析的文本
+     */
+    public static LocalDateTime parse(CharSequence text) {
+        return LocalDateTime.parse(text, NORM_DATE_TIME_FORMATTER);
+    }
+
+    /**
+     * 解析日期
+     *
+     * @param text 要解析的文本
+     */
+    public static LocalDate parseDate(CharSequence text) {
+        return LocalDate.parse(text, NORM_DATE_FORMATTER);
     }
 
     /**
@@ -182,6 +247,26 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
      */
     public static String format(LocalTime localTime) {
         return localTime.format(NORM_TIME_FORMATTER);
+    }
+
+    /**
+     * 格式化日期
+     */
+    public static String format(Date date) {
+        return format(date, DATE_TIME_PATTERN);
+    }
+
+    /**
+     * 格式化日期
+     *
+     * @param date    日期
+     * @param pattern 格式
+     * @return String
+     */
+    public static String format(Date date, String pattern) {
+        final DateFormat dateFormat = new SimpleDateFormat(pattern);
+        dateFormat.setTimeZone(DEFAULT_TIME_ZONE);
+        return dateFormat.format(date);
     }
 
     /**
