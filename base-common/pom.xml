@@ -13,7 +13,7 @@
     <!-- 项目属性 -->
     <properties>
         <!-- SpringBoot版本 -->
-        <spring-boot.version>2.6.3</spring-boot.version>
+        <spring-boot.version>2.6.4</spring-boot.version>
         <!-- main version setting -->
         <druid.version>1.2.8</druid.version>
         <!-- 基础配置 -->
