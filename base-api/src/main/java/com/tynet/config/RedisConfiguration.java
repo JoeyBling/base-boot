@@ -24,6 +24,9 @@ public class RedisConfiguration {
 
     /**
      * 自定义模板对象
+     * <p>
+     * 重写：{@link org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration#redisTemplate}
+     * </p>
      */
     @Bean
     @ConditionalOnMissingBean
@@ -32,6 +35,7 @@ public class RedisConfiguration {
         redisTemplate.setConnectionFactory(redisConnectionFactory);
         // 设置序列化方式
         redisTemplate.setKeySerializer(RedisSerializer.string());
+        redisTemplate.setHashKeySerializer(RedisSerializer.string());
         return redisTemplate;
     }
 

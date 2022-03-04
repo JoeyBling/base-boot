@@ -19,8 +19,8 @@
         <!-- SpringBoot版本 -->
         <spring-boot.version>2.6.4</spring-boot.version>
         <!-- main version setting -->
-        <hutool.version>5.7.21</hutool.version>
-        <guava.version>31.0.1-jre</guava.version>
+        <hutool.version>5.7.22</hutool.version>
+        <guava.version>31.1-jre</guava.version>
         <ognl.version>3.2.21</ognl.version>
         <bcprov.version>1.70</bcprov.version>
         <!-- 基础配置 -->
@@ -73,6 +73,7 @@
                 <artifactId>hutool-bom</artifactId>
                 <version>${hutool.version}</version>
                 <type>pom</type>
+                <!-- supported since version `5.7.15` - https://github.com/dromara/hutool/issues/1561 -->
                 <!--<scope>import</scope>-->
             </dependency>
             <dependency>

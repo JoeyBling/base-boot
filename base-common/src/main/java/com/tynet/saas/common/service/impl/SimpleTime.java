@@ -1,6 +1,7 @@
 package com.tynet.saas.common.service.impl;
 
 import com.tynet.saas.common.service.ITime;
+import lombok.ToString;
 
 import java.util.concurrent.TimeUnit;
 
@@ -9,6 +10,7 @@ import java.util.concurrent.TimeUnit;
  *
  * @author Created by 思伟 on 2021/9/9
  */
+@ToString
 public class SimpleTime implements ITime {
 
     /**
@@ -40,6 +42,14 @@ public class SimpleTime implements ITime {
     @Override
     public TimeUnit unit() {
         return unit;
+    }
+
+    /**
+     * just test
+     */
+    public static void main(String[] args) {
+        final ITime instance = new SimpleTime(10, TimeUnit.SECONDS);
+        System.out.println(instance.toDuration());
     }
 
 }

@@ -18,9 +18,11 @@ import java.util.Objects;
  *
  * @author Created by 思伟 on 2020/6/6
  */
-// 开启AspectJ 自动代理模式
-//@EnableAspectJAutoProxy(proxyTargetClass = true, exposeProxy = true)
-@EnableAspectJAutoProxy(proxyTargetClass = true)
+// 开启`AspectJ`自动代理模式
+@EnableAspectJAutoProxy(
+        proxyTargetClass = true
+        // , exposeProxy = true
+)
 @EnableScheduling
 @ServletComponentScan
 /*@tk.mybatis.spring.annotation.MapperScan({

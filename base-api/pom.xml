@@ -13,6 +13,8 @@
     <description>API接口网关实现</description>
 
     <properties>
+        <!-- Special VM Properties - 解决测试阶段中文乱码 -->
+        <!--<argLine>-Dfile.encoding=UTF-8</argLine>-->
     </properties>
 
     <!-- 依赖项定义 -->
@@ -57,9 +59,19 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-pool2</artifactId>
         </dependency>
+        <!-- 分布式锁：https://github.com/redisson/redisson -->
+        <!--<dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson-spring-boot-starter</artifactId>
+            <version>3.16.8</version>
+        </dependency>-->
         <!-- 定时任务 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -135,15 +147,16 @@
                 </includes>
             </resource>
             <resource>
+                <!-- 某些时候IDEA运行失效 -->
                 <directory>${basedir}/src/main/resources</directory>
+                <!-- 资源过滤功能 -->
+                <filtering>true</filtering>
                 <includes>
                     <include>**/*.yml</include>
                     <include>**/*.yaml</include>
                     <include>**/*.properties</include>
                     <include>**/*.txt</include>
                 </includes>
-                <!-- 资源过滤功能 -->
-                <filtering>true</filtering>
             </resource>
             <resource>
                 <directory>${basedir}/src/main/resources/conf/${package.environment}</directory>
