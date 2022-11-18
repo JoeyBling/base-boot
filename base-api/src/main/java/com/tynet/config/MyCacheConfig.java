@@ -2,22 +2,20 @@ package com.tynet.config;
 
 import com.tynet.saas.common.handler.LoggingCacheErrorHandler;
 import org.springframework.cache.CacheManager;
-import org.springframework.cache.annotation.CachingConfigurerSupport;
+import org.springframework.cache.annotation.CachingConfigurer;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.CacheErrorHandler;
 import org.springframework.context.annotation.Configuration;
 
 /**
  * Spring-Cache配置类
- * <p>
- * 参考：https://blog.csdn.net/s674334235/article/details/82593899
- * </p>
+ * <p>参考：https://blog.csdn.net/s674334235/article/details/82593899
  *
  * @author Created by 思伟 on 2020/4/23
  */
 @Configuration
 @EnableCaching(proxyTargetClass = true)
-public class MyCacheConfig extends CachingConfigurerSupport {
+public class MyCacheConfig implements CachingConfigurer {
 
     /**
      * 重写这个方法，目的是用以提供默认的cacheManager
@@ -31,8 +29,7 @@ public class MyCacheConfig extends CachingConfigurerSupport {
      */
     @Override
     public CacheManager cacheManager() {
-        return super.cacheManager();
-        // return ehCacheCacheManager;
+        return CachingConfigurer.super.cacheManager();
     }
 
     /**

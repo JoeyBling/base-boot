@@ -36,7 +36,7 @@ public interface ICacheService {
      * @return String
      */
     default String getCachePrefix() {
-        return getCacheName();
+        return this.getCacheName();
     }
 
 }

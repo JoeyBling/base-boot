@@ -2,12 +2,12 @@ package com.tynet.saas.common.util;
 
 import cn.hutool.core.io.FileUtil;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.util.Assert;
 import org.springframework.util.ObjectUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Matcher;
 
@@ -174,7 +174,7 @@ public class HttpUtil {
      * @throws IOException
      */
     public final static String getRemoteAddr(HttpServletRequest request) throws IOException {
-        Assert.notNull(request, "request must not be null");
+        Objects.requireNonNull(request, "request must not be null");
         // 获取请求主机IP地址,如果通过代理进来，则透过防火墙获取真实IP地址
         String ip = request.getHeader("X-Forwarded-For");
         String unknown = "unknown";
@@ -219,4 +219,5 @@ public class HttpUtil {
         // 获取失败返回本机IP
         return isIPAddr(ip) ? ip : "127.0.0.1";
     }
+
 }

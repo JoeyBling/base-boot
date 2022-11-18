@@ -5,7 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.Marker;
 
 /**
- * 基于{@link Logger}简单装饰器实现
+ * 基于{@link Logger}抽象装饰器实现
  * <p>
  * 简化了真实装饰器类的写法，默认调用实现
  * 子类只重写他们感兴趣的方法 - 对标于适配器

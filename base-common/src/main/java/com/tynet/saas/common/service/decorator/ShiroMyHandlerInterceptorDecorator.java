@@ -3,7 +3,7 @@ package com.tynet.saas.common.service.decorator;
 import com.tynet.saas.common.service.MyHandlerInterceptor;
 
 /**
- * Shiro简单日志抽象装饰器实现
+ * Shiro简单日志简单装饰器实现
  *
  * @author Created by 思伟 on 2021/3/29
  */

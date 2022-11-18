@@ -13,20 +13,20 @@
     <!-- 项目属性 -->
     <properties>
         <!-- tools version -->
-        <commons-codec.version>1.15</commons-codec.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
+        <commons-codec.version>1.15</commons-codec.version>
         <!-- main version setting -->
-        <lombok.version>1.18.22</lombok.version>
-        <junit-jupiter.version>5.8.2</junit-jupiter.version>
+        <lombok.version>1.18.24</lombok.version>
+        <junit-jupiter.version>5.9.0</junit-jupiter.version>
         <slf4j.version>1.7.36</slf4j.version>
-        <logback.version>1.2.10</logback.version>
-        <log4j2.version>2.17.1</log4j2.version>
+        <logback.version>1.2.11</logback.version>
+        <log4j2.version>2.17.2</log4j2.version>
         <!-- 基础配置 -->
         <java.version>1.8</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
         <!-- 跳过测试 -->
@@ -118,8 +118,17 @@
         <!-- 国产工具包 -->
         <dependency>
             <groupId>cn.hutool</groupId>
-            <artifactId>hutool-bom</artifactId>
-            <type>pom</type>
+            <artifactId>hutool-core</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-crypto</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-http</artifactId>
             <optional>true</optional>
         </dependency>
         <dependency>
@@ -132,13 +141,18 @@
             <artifactId>fastjson</artifactId>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba.fastjson2</groupId>
+            <artifactId>fastjson2-extension</artifactId>
+            <optional>true</optional>
+        </dependency>
         <!-- google java lib -->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <optional>true</optional>
         </dependency>
-        <!-- ognl语言工具包 -->
+        <!-- OGNL语言工具包 -->
         <dependency>
             <groupId>ognl</groupId>
             <artifactId>ognl</artifactId>
@@ -147,7 +161,7 @@
         <!-- 加密工具类 -->
         <dependency>
             <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-jdk15on</artifactId>
+            <artifactId>bcprov-jdk18on</artifactId>
             <optional>true</optional>
         </dependency>
         <dependency>

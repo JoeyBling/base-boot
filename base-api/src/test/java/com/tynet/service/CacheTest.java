@@ -90,6 +90,8 @@ public class CacheTest extends BaseAppTest {
 
         redisTemplate.opsForValue().setIfAbsent(cacheKey, true, Duration.ofMinutes(5));
         redisTemplate.opsForHash().putIfAbsent("TEST_NODE", cacheKey, true);
+
+        // redisTemplate.execute()
     }
 
     /**

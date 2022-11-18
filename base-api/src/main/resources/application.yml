@@ -87,8 +87,6 @@ spring:
         reset-enable: true
         allow: 192.168.0.1/16
 
-  jpa:
-    open-in-view: false
   quartz:
     # 覆盖已存在的任务
     overwrite-existing-jobs: true
@@ -128,6 +126,8 @@ mybatis-plus:
   type-aliases-super-type: ${mybatis.type-aliases-super-type:}
   configuration:
     map-underscore-to-camel-case: true
+    # 一级缓存
+    # local-cache-scope: statement
     # log-prefix: bootplus.dao.
   global-config:
     db-config:
@@ -143,6 +143,9 @@ management:
     java:
       # https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.6-Release-Notes
       enabled: true
+    os:
+      # https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.7-Release-Notes
+      enabled: true
   endpoints:
     web:
       exposure:
@@ -154,6 +157,7 @@ management:
           - beans
           - metrics
           - caches
+          - loggers
           - arthas
 
 arthas:
@@ -207,7 +211,9 @@ application:
         allowedMethods:
           - GET
   prj:
-    sequence-work-id: 1
+    sequence:
+      work-id: 0
+      data-center-id: 0
 
 info:
   app:

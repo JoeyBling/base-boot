@@ -22,11 +22,7 @@ public abstract class BaseAppMvcTest extends BaseAppTest {
     protected WebApplicationContext webApplicationContext;
 
     /**
-     * <p>
-     * junit5后重写必须加上注解，不会继承注解
-     * </p>
-     *
-     * @throws Exception
+     * {@inheritDoc} <p>`JUnit 5`后重写不会继承注解
      */
     @BeforeEach
     @Override

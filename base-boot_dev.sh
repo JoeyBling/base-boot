@@ -49,7 +49,7 @@ SPRING_OPTS="$SPRING_OPTS --server.servlet.context-path=/boot"
 # 停止程序等待时间(秒)
 SHUTDOWN_WAIT_SECONDS=20
 
-# 日志存放的路径
+# 日志存放路径
 LOG_PATH=out.log
 
 # 进程ID

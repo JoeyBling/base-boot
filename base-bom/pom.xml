@@ -17,12 +17,13 @@
         -->
         <base.version>${project.version}</base.version>
         <!-- SpringBoot版本 -->
-        <spring-boot.version>2.6.4</spring-boot.version>
+        <spring-boot.version>2.7.5</spring-boot.version>
         <!-- main version setting -->
-        <hutool.version>5.7.22</hutool.version>
+        <javassist.version>3.29.2-GA</javassist.version>
+        <hutool.version>5.8.10</hutool.version>
         <guava.version>31.1-jre</guava.version>
-        <ognl.version>3.2.21</ognl.version>
-        <bcprov.version>1.70</bcprov.version>
+        <ognl.version>3.3.4</ognl.version>
+        <bouncycastle.version>1.72</bouncycastle.version>
         <!-- 基础配置 -->
         <java.version>1.8</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
@@ -54,18 +55,11 @@
                 <!-- 无效配置(待删除) -->
                 <!--<optional>true</optional>-->
             </dependency>
+            <!-- Java字节码工具包（发行说明：https://github.com/jboss-javassist/javassist/blob/master/Changes.md） -->
             <dependency>
                 <groupId>org.javassist</groupId>
                 <artifactId>javassist</artifactId>
-                <!--<version>3.27.0-GA</version>-->
-                <version>3.28.0-GA</version>
-            </dependency>
-            <!-- alipay -->
-            <dependency>
-                <groupId>com.alipay.sdk</groupId>
-                <artifactId>alipay-sdk-java</artifactId>
-                <!--<version>4.7.12.ALL</version>-->
-                <version>4.15.0.ALL</version>
+                <version>${javassist.version}</version>
             </dependency>
             <!-- 国产工具包 -->
             <dependency>
@@ -74,8 +68,9 @@
                 <version>${hutool.version}</version>
                 <type>pom</type>
                 <!-- supported since version `5.7.15` - https://github.com/dromara/hutool/issues/1561 -->
-                <!--<scope>import</scope>-->
+                <scope>import</scope>
             </dependency>
+            <!-- 不建议使用（此方式会引入所有模块） -->
             <dependency>
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
@@ -89,13 +84,24 @@
                     hessian-x.jar!\META-INF\hessian\serializers
                     hessian-x.jar!\META-INF\hessian\deserializers
                     Bug链接：http://bugs.caucho.com/view.php?id=3920 -->
-                <version>4.0.65</version>
+                <version>4.0.66</version>
             </dependency>
-            <!-- FastJson 1.2.60 以下版本 有重大漏洞 -->
+            <!-- FastJson（漏洞版本：>= 1.2.60 & <= 1.2.80） -->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
-                <version>1.2.79</version>
+                <version>1.2.83</version>
+            </dependency>
+            <!-- https://github.com/alibaba/fastjson2（支持JDK14 Records） -->
+            <dependency>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>2.0.19</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2-extension</artifactId>
+                <version>2.0.19</version>
             </dependency>
             <!-- google java lib -->
             <dependency>
@@ -103,17 +109,74 @@
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
             </dependency>
-            <!-- ognl语言工具包 -->
+            <!-- OGNL语言工具包（发行说明：https://github.com/orphan-oss/ognl/blob/master/docs/VersionNotes.md） -->
             <dependency>
                 <groupId>ognl</groupId>
                 <artifactId>ognl</artifactId>
                 <version>${ognl.version}</version>
             </dependency>
-            <!-- 加密工具类 - 漏洞版本：>= 1.65 & < 1.67 -->
+
+            <!-- 加密工具类
+                1. GitHub镜像：https://github.com/bcgit/bc-java
+                2. 发行说明：https://www.bouncycastle.org/releasenotes.html
+                3. 不同模块区别：https://stackoverflow.com/a/73013571/8470159
+             -->
+
+            <!-- 不建议使用（由于Java 15导致版本表达不明确，现在应该使用工件`jdk15to18`） -->
             <dependency>
                 <groupId>org.bouncycastle</groupId>
                 <artifactId>bcprov-jdk15on</artifactId>
-                <version>${bcprov.version}</version>
+                <version>1.70</version>
+            </dependency>
+
+            <!-- 轻量级 API（JDK 1.5 - JDK 1.8） -->
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcprov-jdk15to18</artifactId>
+                <version>${bouncycastle.version}</version>
+            </dependency>
+            <!-- ASN.1 APIs 扩展 -->
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcutil-jdk15to18</artifactId>
+                <version>${bouncycastle.version}</version>
+            </dependency>
+            <!-- 证书生成 -->
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcpkix-jdk15to18</artifactId>
+                <version>${bouncycastle.version}</version>
+            </dependency>
+
+            <!-- 轻量级 API（JDK 1.8+） -->
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcprov-jdk18on</artifactId>
+                <version>${bouncycastle.version}</version>
+            </dependency>
+            <!-- ASN.1 APIs 扩展 -->
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcutil-jdk18on</artifactId>
+                <version>${bouncycastle.version}</version>
+            </dependency>
+            <!-- 证书生成 -->
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcpkix-jdk18on</artifactId>
+                <version>${bouncycastle.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.jsqlparser</groupId>
+                <artifactId>jsqlparser</artifactId>
+                <version>4.5</version>
+            </dependency>
+            <!-- alipay -->
+            <dependency>
+                <groupId>com.alipay.sdk</groupId>
+                <artifactId>alipay-sdk-java</artifactId>
+                <version>4.34.52.ALL</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -127,19 +190,22 @@
         <license>
             <name>The MIT License (MIT)</name>
             <url>https://github.com/JoeyBling/base-boot/blob/master/LICENSE</url>
+            <distribution>repo</distribution>
         </license>
     </licenses>
 
     <scm>
+        <connection>scm:git:git@github.com:JoeyBling/base-boot.git</connection>
+        <developerConnection>scm:git:https://github.com/JoeyBling/base-boot.git</developerConnection>
         <url>https://github.com/JoeyBling/base-boot</url>
-        <connection>https://github.com/JoeyBling/base-boot.git</connection>
-        <developerConnection>https://github.com/JoeyBling/</developerConnection>
     </scm>
 
     <developers>
         <developer>
+            <id>JoeyBling</id>
             <name>周思伟</name>
             <email>2434387555@qq.com</email>
+            <url>https://github.com/JoeyBling</url>
             <organization>周思伟</organization>
         </developer>
     </developers>

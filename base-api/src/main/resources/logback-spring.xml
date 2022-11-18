@@ -2,16 +2,30 @@
 <configuration scan="false" scanPeriod="3600 seconds" debug="false">
 
     <contextName>logback</contextName>
+
     <!-- 日志输出配置 -->
+
+    <!-- springProperty：org.springframework.boot.logging.logback.SpringPropertyAction
+     -->
+
+    <!-- 项目名 -->
+    <springProperty name="log.name" source="spring.application.name" scope="context" defaultValue="base-api"/>
+    <!-- 日志存放路径 -->
+    <springProperty name="log.path" source="application.log.path" scope="context" defaultValue="logs"/>
+    <!-- 日志级别 -->
+    <springProperty name="log.level" source="application.log.level" scope="context" defaultValue="DEBUG"/>
+    <!-- 发布环境（仅local本地调试环境输出控制台日志） -->
+    <springProperty name="log.env" source="application.deploy.env" scope="context" defaultValue="master"/>
+
+    <property name="log.name" value="${app.name:-base-api}"/>
     <property name="log.path" value="${catalina.base:-.}/logs"/>
-    <property name="log.name" value="base-api"/>
+    <!-- 日志输出格式 -->
     <property name="log.pattern"
               value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{36} - %msg%n"/>
     <property name="log.pattern.detail"
               value="[%p][%d{yyyy-MM-dd HH:mm:ss}] %c{1} [%file:%L] - %m%n"/>
 
-    <!-- 彩色日志 -->
-    <!-- 彩色日志依赖的渲染类 -->
+    <!-- 彩色日志（依赖的渲染类） -->
     <conversionRule conversionWord="clr"
                     converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
     <conversionRule conversionWord="wex"
@@ -26,8 +40,8 @@
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>${log.pattern}</pattern>
-            <!-- 由于走`Mvn`命令启动Tomcat默认编码为GBK，此处不进行设置 -->
-            <charset>UTF-8</charset>
+            <!-- 控制台日志输出编码格式由系统控制（默认） -->
+            <!--<charset>UTF-8</charset>-->
         </encoder>
     </appender>
 
@@ -107,15 +121,15 @@
     <!-- 解决SQL日志打印2次的问题 -->
     <!--<logger name="java.sql.PreparedStatement" level="DEBUG"></logger>-->
 
-    <logger name="com.alibaba.druid.filter.stat.StatFilter"
-            level="ERROR,slowsql" additivity="false">
+    <logger name="com.alibaba.druid.filter.stat.StatFilter" level="ERROR" additivity="false">
         <appender-ref ref="STDOUT_SLOW_SQL"/>
         <appender-ref ref="FILE"/>
     </logger>
 
     <logger name="org.springframework" level="INFO"></logger>
 
-    <logger name="com.tynet" level="DEBUG"></logger>
+    <!-- 系统模块日志级别控制 -->
+    <logger name="com.tynet" level="${log.level:-DEBUG}"></logger>
 
     <root level="INFO">
         <appender-ref ref="STDOUT"/>

@@ -132,7 +132,7 @@ public class ApplicationProperties extends IAppPropertiesAdapter implements ISta
      */
     public void init() {
         // 原子性操作
-        if (!initFlag.compareAndSet(false, true)) {
+        if (!initialized.compareAndSet(false, true)) {
             return;
         }
         Assert.hasText(this.getStoragePath(), "本地存储根路径不能为空");
@@ -291,13 +291,13 @@ public class ApplicationProperties extends IAppPropertiesAdapter implements ISta
      * @return boolean
      */
     public final boolean isInitialized() {
-        return Boolean.TRUE.equals(initFlag.get());
+        return Boolean.TRUE.equals(initialized.get());
     }
 
     /**
      * 初始化标识
      */
     @Getter(AccessLevel.NONE)
-    protected final AtomicBoolean initFlag = new AtomicBoolean(false);
+    protected final AtomicBoolean initialized = new AtomicBoolean(false);
 
 }

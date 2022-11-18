@@ -59,49 +59,57 @@
             <artifactId>base-core</artifactId>
             <optional>true</optional>
         </dependency>
-        <!-- apache 工具包 -->
+        <!-- apache 工具包（发行历史：https://commons.apache.org/proper/commons-lang/changes-report.html） -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
+        <!-- 发布历史：https://commons.apache.org/proper/commons-collections/changes-report.html -->
         <dependency>
             <groupId>org.apache.commons</groupId>
-            <artifactId>commons-text</artifactId>
-            <version>${commons-text.version}</version>
+            <artifactId>commons-collections4</artifactId>
+            <version>4.4</version>
+            <optional>true</optional>
         </dependency>
+        <!-- 发行说明：https://commons.apache.org/proper/commons-logging/changes-report.html -->
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.2</version>
+            <optional>true</optional>
+        </dependency>
+        <!-- 发行说明：https://commons.apache.org/proper/commons-codec/changes-report.html -->
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-        </dependency>
+        <!-- 发行说明：https://commons.apache.org/proper/commons-net/changes-report.html -->
         <dependency>
             <groupId>commons-net</groupId>
             <artifactId>commons-net</artifactId>
             <version>${commons-net.version}</version>
         </dependency>
+        <!-- 发行说明：https://commons.apache.org/proper/commons-io/changes-report.html -->
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>${commons-io.version}</version>
         </dependency>
+        <!-- 发行说明：https://commons.apache.org/proper/commons-beanutils/changes-report.html -->
         <dependency>
             <groupId>commons-beanutils</groupId>
             <artifactId>commons-beanutils</artifactId>
             <version>${commons-beanutils.version}</version>
         </dependency>
+        <!-- 发行说明：https://commons.apache.org/proper/commons-fileupload/changes-report.html -->
         <dependency>
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
             <version>${commons-fileupload.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-io</groupId>
-                    <artifactId>commons-io</artifactId>
-                </exclusion>
-            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
         </dependency>
         <!-- 条形码、二维码生成 -->
         <dependency>

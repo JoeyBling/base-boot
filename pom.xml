@@ -6,7 +6,7 @@
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent -->
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.6.4</version>
+        <version>2.7.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -43,15 +43,17 @@
 
         <!-- core version -->
         <cglib.version>3.3.0</cglib.version>
-        <mybatis.version>3.5.9</mybatis.version>
+        <mybatis.version>3.5.11</mybatis.version>
         <mybatis-spring.version>2.0.7</mybatis-spring.version>
         <mybatis-spring-boot.version>2.2.2</mybatis-spring-boot.version>
-        <mybatis-plus-spring-boot.version>3.5.1</mybatis-plus-spring-boot.version>
-        <mapper-spring-boot.version>2.1.5</mapper-spring-boot.version>
-        <pagehelper-spring-boot.version>1.4.1</pagehelper-spring-boot.version>
+        <mybatis-plus.version>3.5.2</mybatis-plus.version>
+        <!-- 从 `4.2.0` 开始统一了所有模块的版本号 -->
+        <mapper-spring-boot.version>4.2.2</mapper-spring-boot.version>
+        <mapper5.version>2.0.0</mapper5.version>
+        <pagehelper-spring-boot.version>1.4.5</pagehelper-spring-boot.version>
         <orderbyhelper-spring-boot.version>1.0.2</orderbyhelper-spring-boot.version>
         <!-- 校验连接错误：`druid.mysql.usePingMethod` - https://github.com/alibaba/druid/issues/3873 -->
-        <druid-spring-boot.version>1.2.8</druid-spring-boot.version>
+        <druid-spring-boot.version>1.2.14</druid-spring-boot.version>
 
         <!--
         <mybatis.version>3.5.4</mybatis.version>
@@ -61,22 +63,22 @@
         -->
 
         <!-- common tools version -->
-        <commons-codec.version>1.15</commons-codec.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
-        <commons-text.version>1.8</commons-text.version>
-        <commons-httpclient.version>4.5.13</commons-httpclient.version>
-        <commons-net.version>3.6</commons-net.version>
+        <commons-text.version>1.10.0</commons-text.version>
+        <commons-codec.version>1.15</commons-codec.version>
+        <commons-net.version>3.8.0</commons-net.version>
         <commons-io.version>2.11.0</commons-io.version>
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
         <commons-fileupload.version>1.4</commons-fileupload.version>
+        <httpclient.version>4.5.13</httpclient.version>
 
         <!-- other tools version -->
-        <google-zxing.version>3.4.1</google-zxing.version>
-        <poi.version>5.2.0</poi.version>
-        <jsoup.version>1.14.3</jsoup.version>
+        <poi.version>5.2.3</poi.version>
+        <google-zxing.version>3.5.1</google-zxing.version>
+        <jsoup.version>1.15.3</jsoup.version>
 
         <!-- 诊断工具 -->
-        <arthas-spring-boot.version>3.5.5</arthas-spring-boot.version>
+        <arthas-spring-boot.version>3.6.7</arthas-spring-boot.version>
 
         <!-- private tools version - 特扬 -->
         <!--<tynet.wechat4j-repeater.version>2.0.2-SNAPSHOT</tynet.wechat4j-repeater.version>-->
@@ -117,7 +119,7 @@
                 <artifactId>base-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <!-- poi office -->
+            <!-- poi office（变更日志：https://poi.apache.org/changes.html） -->
             <dependency>
                 <groupId>org.apache.poi</groupId>
                 <artifactId>poi-ooxml</artifactId>
@@ -141,7 +143,7 @@
                 <artifactId>jsoup</artifactId>
                 <version>${jsoup.version}</version>
             </dependency>
-            <!-- 阿尔萨斯 - Alibaba开源的Java诊断工具 -->
+            <!-- 阿尔萨斯（Java诊断工具） -->
             <dependency>
                 <groupId>com.taobao.arthas</groupId>
                 <artifactId>arthas-spring-boot-starter</artifactId>
@@ -173,7 +175,22 @@
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>${mybatis-plus-spring-boot.version}</version>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-core</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-annotation</artifactId>
+                <version>${mybatis-plus.version}</version>
             </dependency>
             <!-- 通用Mapper - https://github.com/abel533/Mapper -->
             <dependency>
@@ -188,6 +205,17 @@
                     </exclusion>
                 </exclusions>
             </dependency>
+
+            <!-- 通用 Mapper5：https://github.com/mybatis-mapper/mapper -->
+            <dependency>
+                <groupId>io.mybatis</groupId>
+                <artifactId>mapper-bom</artifactId>
+                <version>${mapper5.version}</version>
+                <type>pom</type>
+                <!-- 依赖关系冲突：https://github.com/mybatis-mapper/mapper/issues/67 -->
+                <!--<scope>import</scope>-->
+            </dependency>
+
             <!-- 分页拦截器 -->
             <dependency>
                 <groupId>com.github.pagehelper</groupId>
@@ -205,12 +233,6 @@
                 <groupId>com.cuisongliu</groupId>
                 <artifactId>orderbyhelper-spring-boot-starter</artifactId>
                 <version>${orderbyhelper-spring-boot.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>com.github.jsqlparser</groupId>
-                        <artifactId>jsqlparser</artifactId>
-                    </exclusion>
-                </exclusions>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -229,12 +251,21 @@
         <!-- 国产工具包 -->
         <dependency>
             <groupId>cn.hutool</groupId>
+            <artifactId>hutool-core</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- 不建议使用（仅仅做个标记） -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
+            <scope>test</scope>
+            <optional>true</optional>
         </dependency>
         <!-- 加密工具类 -->
         <dependency>
             <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-jdk15on</artifactId>
+            <artifactId>bcprov-jdk18on</artifactId>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>

@@ -26,26 +26,8 @@ public abstract class IAppPropertiesAdapter implements IAppProperties {
      * <p>This implementation is empty.
      */
     @Override
-    public boolean isDebugMode() {
-        return IAppProperties.super.isDebugMode();
-    }
-
-    /**
-     * {@inheritDoc}
-     * <p>This implementation is empty.
-     */
-    @Override
     public String getDomain() {
         return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     * <p>This implementation is empty.
-     */
-    @Override
-    public String getStoragePath() {
-        return IAppProperties.super.getStoragePath();
     }
 
     /**

@@ -1,6 +1,7 @@
 package com.tynet;
 
 import cn.hutool.core.map.MapUtil;
+import org.apache.catalina.Globals;
 import org.springframework.boot.Banner.Mode;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,6 +11,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -51,6 +53,18 @@ public class App extends SpringBootServletInitializer {
                 // .put("spring.config.on-location-not-found", "IGNORE")
                 .build());
         app.setBannerMode(Mode.CONSOLE);
+
+        /**
+         * 默认字符集 <p>从JDK18开始，将`UTF-8`指定为标准`Java API`的默认字符集
+         */
+        final String charsetName = System.getProperty("file.encoding");
+        System.out.println("默认字符集：" + charsetName);
+        System.out.println("系统默认字符集：" + Charset.defaultCharset().name());
+
+        // 此处需启动后才能获取值
+        System.out.println("容器工作目录（路径）：" + System.getProperty(Globals.CATALINA_BASE_PROP));
+        System.out.println("容器安装目录（路径）：" + System.getProperty(Globals.CATALINA_HOME_PROP));
+
         System.out.println(
                 String.format("Main Application Entry args = %s", Arrays.toString(args)));
         final ApplicationContext applicationContext = app.run(args);

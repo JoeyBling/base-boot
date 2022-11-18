@@ -19,12 +19,12 @@ public class TransPageBaseRequest extends TransBaseRequest {
     private Boolean paging;
 
     /**
-     * 每页页数
+     * 每页条数
      */
     private int pageSize = 100;
 
     /**
-     * 第几页
+     * 当前页码
      */
     private int pageNum = 1;
 

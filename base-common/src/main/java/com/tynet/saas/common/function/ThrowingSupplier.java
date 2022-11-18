@@ -6,6 +6,7 @@ import java.util.function.Supplier;
 
 /**
  * 自定义获取结果的功能接口 - A throwing {@link Supplier}
+ * <p>允许抛出已检查的异常. - Allows for checked exceptions to be thrown.
  *
  * @param <T> 参数类型
  * @author Created by 思伟 on 2021/11/3
@@ -14,13 +15,16 @@ import java.util.function.Supplier;
 public interface ThrowingSupplier<T> extends Supplier<T> {
 
     /**
-     * 获取结果，可能引发异常。
+     * 获取结果，可能引发异常.
      *
      * @return a result
      * @throws Exception in case of errors
      */
     T doGet() throws Exception;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     default T get() {
         try {

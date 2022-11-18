@@ -23,4 +23,4 @@ ROOT
 
 ## 技术选型
 
-- 核心框架：`Spring Boot 2.5.x`
+- 核心框架：`Spring Boot 2.7.x`

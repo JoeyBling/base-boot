@@ -9,11 +9,11 @@ import org.jetbrains.annotations.Nullable;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.ConfigurationPropertiesBinding;
 import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
+import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 
-import javax.validation.constraints.NotNull;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -34,10 +34,10 @@ public class MyApplicationProperties implements IStartUp {
     public static final String MY_PROPERTIES_PREFIX = ApplicationProperties.APPLICATION_CONFIG_PREFIX + ".prj";
 
     /**
-     * 序列号生成的workId - 多机负载时需要修改
+     * 分布式ID生成器 <p>多机部署时必须修改
      */
-    @NotNull
-    private long sequenceWorkId;
+    @NestedConfigurationProperty
+    private Sequence sequence = new Sequence();
 
     /**
      * 仅仅测试
@@ -82,5 +82,22 @@ public class MyApplicationProperties implements IStartUp {
      */
     @Getter(AccessLevel.NONE)
     protected final AtomicBoolean initFlag = new AtomicBoolean(false);
+
+    /**
+     * （全局）分布式ID生成器 <p>自增序列
+     */
+    @Data
+    public static class Sequence {
+
+        /**
+         * 工作机器ID
+         */
+        private long workId;
+
+        /**
+         * 数据中心ID
+         */
+        private long dataCenterId;
+    }
 
 }

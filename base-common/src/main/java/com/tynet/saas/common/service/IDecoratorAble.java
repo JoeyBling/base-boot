@@ -8,7 +8,6 @@ package com.tynet.saas.common.service;
  *
  * @author Created by 思伟 on 2021/3/23
  */
-
 public interface IDecoratorAble<T> {
 
     /**
@@ -17,4 +16,5 @@ public interface IDecoratorAble<T> {
      * @return {@link T}
      */
     T getTarget();
+
 }

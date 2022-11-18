@@ -13,12 +13,12 @@
     <!-- 项目属性 -->
     <properties>
         <!-- SpringBoot版本 -->
-        <spring-boot.version>2.6.4</spring-boot.version>
+        <spring-boot.version>2.7.5</spring-boot.version>
         <!-- main version setting -->
-        <druid.version>1.2.8</druid.version>
+        <druid.version>1.2.14</druid.version>
         <!-- 基础配置 -->
         <java.version>1.8</java.version>
-        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
@@ -46,8 +46,6 @@
                 <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-                <!-- 无效配置(待删除) -->
-                <!--<optional>true</optional>-->
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -64,23 +62,18 @@
             <artifactId>spring-boot-starter-logging</artifactId>
             <optional>true</optional>
         </dependency>
-        <!-- https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.3-Release-Notes -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-validation</artifactId>
-            <optional>true</optional>
-        </dependency>
         <!-- spring-web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <optional>true</optional>
         </dependency>
-        <!-- <dependency>
-             <groupId>org.springframework.boot</groupId>
-             <artifactId>spring-boot-starter-tomcat</artifactId>
-             <optional>true</optional>
-         </dependency>-->
+        <!-- Bean Validation：https://github.com/jakartaee/validation -->
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+            <optional>true</optional>
+        </dependency>
         <!-- apache 工具包 -->
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -101,15 +94,19 @@
         <!-- 国产工具包 -->
         <dependency>
             <groupId>cn.hutool</groupId>
-            <artifactId>hutool-bom</artifactId>
-            <type>pom</type>
+            <artifactId>hutool-core</artifactId>
             <optional>true</optional>
         </dependency>
-        <!--<dependency>
+        <dependency>
             <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
+            <artifactId>hutool-crypto</artifactId>
             <optional>true</optional>
-        </dependency>-->
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-http</artifactId>
+            <optional>true</optional>
+        </dependency>
         <dependency>
             <groupId>com.caucho</groupId>
             <artifactId>hessian</artifactId>
@@ -126,7 +123,7 @@
             <artifactId>guava</artifactId>
             <optional>true</optional>
         </dependency>
-        <!-- ognl语言工具包 -->
+        <!-- OGNL语言工具包 -->
         <dependency>
             <groupId>ognl</groupId>
             <artifactId>ognl</artifactId>
@@ -135,7 +132,7 @@
         <!-- 加密工具类 -->
         <dependency>
             <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-jdk15on</artifactId>
+            <artifactId>bcprov-jdk18on</artifactId>
             <optional>true</optional>
         </dependency>
         <dependency>
@@ -231,9 +228,9 @@
     </licenses>
 
     <scm>
+        <connection>scm:git:https://github.com/JoeyBling/base-boot.git</connection>
+        <developerConnection>scm:git:https://github.com/JoeyBling/base-boot.git</developerConnection>
         <url>https://github.com/JoeyBling/base-boot</url>
-        <connection>https://github.com/JoeyBling/base-boot.git</connection>
-        <developerConnection>https://github.com/JoeyBling/</developerConnection>
     </scm>
 
     <developers>

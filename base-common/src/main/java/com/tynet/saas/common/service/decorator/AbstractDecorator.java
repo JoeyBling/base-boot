@@ -8,8 +8,6 @@ import java.util.Objects;
 
 /**
  * 公用简单抽象装饰器声明实现
- * <p>
- * </p>
  *
  * @author Created by 思伟 on 2021/3/23
  */
@@ -18,11 +16,8 @@ public abstract class AbstractDecorator<T> implements IDecoratorAble<T> {
 
     /**
      * 目标对象
-     * <p>
-     * use {@code final} instead of @code volatile} ?
-     * </p>
+     * <p>use {@code final} instead of @code volatile} ?
      */
-    // protected volatile T target;
     protected final T target;
 
     /**
@@ -34,19 +29,10 @@ public abstract class AbstractDecorator<T> implements IDecoratorAble<T> {
         this.target = Objects.requireNonNull(target);
     }
 
-    /**
-     * 返回此装饰器委托的真实目标对象.
-     * <p>
-     * 如果目标对象是自身，则递归获取真实目标对象
-     * </p>
-     *
-     * @return {@link #target}
-     */
     @Override
     public T getTarget() {
-        // return target;
+        // 如果目标对象是自身，则递归获取真实目标对象
         return target instanceof IDecoratorAble ? ((IDecoratorAble<T>) target).getTarget() : target;
-        // return target instanceof AbstractDecorator ? ((AbstractDecorator<T>) target).getTarget() : target;
-        // return target instanceof IDecoratorAble ? (T) ((IDecoratorAble) target).getTarget() : target;
     }
+
 }
