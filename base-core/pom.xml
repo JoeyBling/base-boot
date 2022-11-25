@@ -58,6 +58,7 @@
         <dependency>
             <groupId>jakarta.persistence</groupId>
             <artifactId>jakarta.persistence-api</artifactId>
+            <optional>true</optional>
         </dependency>
         <!-- Bean Validation：https://github.com/jakartaee/validation -->
         <dependency>

@@ -91,11 +91,12 @@ spring:
     # 覆盖已存在的任务
     overwrite-existing-jobs: true
   cache:
+    # type: none
     redis:
       # 防止缓存穿透
       cache-null-values: true
       use-key-prefix: false
-      #      key-prefix: ${application.name:}
+      # key-prefix: ${application.name:}
       enable-statistics: true
   redis:
     host: 127.0.0.1
@@ -110,7 +111,7 @@ spring:
         min-idle: 5 # 连接池中最小空闲连接
         time-between-eviction-runs: 1 # eviction线程调度时间间隔
 
-# mybatis
+# MyBatis
 mybatis:
   mapper-locations:
     - classpath*:/mapper/**/*.xml
@@ -174,7 +175,7 @@ application:
   version: @project.version@
   url: @project.url@
   domain: https://dev-saas.diandianys.com/
-  storage-path: @project.basedir@
+  # storage-path: @project.basedir@
   cache-config:
     # {@link java.time.Duration#parse} - {@link org.springframework.boot.convert.DurationStyle}
     default-expire: PT60M

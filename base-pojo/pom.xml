@@ -59,6 +59,12 @@
             <artifactId>base-core</artifactId>
             <optional>true</optional>
         </dependency>
+        <!-- jpa-api：https://github.com/jakartaee/persistence -->
+        <dependency>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+            <optional>true</optional>
+        </dependency>
         <!-- apache 工具包（发行历史：https://commons.apache.org/proper/commons-lang/changes-report.html） -->
         <dependency>
             <groupId>org.apache.commons</groupId>

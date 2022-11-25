@@ -66,12 +66,26 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-pool2</artifactId>
         </dependency>
+
         <!-- 分布式锁：https://github.com/redisson/redisson -->
         <dependency>
             <groupId>org.redisson</groupId>
             <artifactId>redisson-spring-boot-starter</artifactId>
             <version>3.18.0</version>
+            <!--<scope>test</scope>-->
+            <exclusions>
+                <!-- javax.cache API (JSR-107)
+                    1. 源仓库：https://github.com/jsr107/jsr107spec
+                    2. SPI：javax.cache.spi.CachingProvider（Ehcache 3也支持）
+                    3. notes：导致`CachingConfigurer`未被代理
+                 -->
+                <exclusion>
+                    <groupId>javax.cache</groupId>
+                    <artifactId>cache-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
+
         <!-- 定时任务 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
