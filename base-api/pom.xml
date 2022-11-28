@@ -78,6 +78,7 @@
                     1. 源仓库：https://github.com/jsr107/jsr107spec
                     2. SPI：javax.cache.spi.CachingProvider（Ehcache 3也支持）
                     3. notes：导致`CachingConfigurer`未被代理
+                    4. 参考文档（spring-boot-cache）：https://yanbin.blog/how-springboot-select-cache-implementation/
                  -->
                 <exclusion>
                     <groupId>javax.cache</groupId>

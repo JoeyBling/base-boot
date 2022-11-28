@@ -44,13 +44,13 @@
         <!-- core version -->
         <cglib.version>3.3.0</cglib.version>
         <mybatis.version>3.5.11</mybatis.version>
-        <mybatis-spring.version>2.0.7</mybatis-spring.version>
-        <mybatis-spring-boot.version>2.2.2</mybatis-spring-boot.version>
+        <mybatis-spring.version>2.1.0</mybatis-spring.version>
+        <mybatis-spring-boot.version>2.3.0</mybatis-spring-boot.version>
         <mybatis-plus.version>3.5.2</mybatis-plus.version>
         <!-- 从 `4.2.0` 开始统一了所有模块的版本号 -->
         <mapper-spring-boot.version>4.2.2</mapper-spring-boot.version>
         <mapper5.version>2.0.0</mapper5.version>
-        <pagehelper-spring-boot.version>1.4.5</pagehelper-spring-boot.version>
+        <pagehelper-spring-boot.version>1.4.6</pagehelper-spring-boot.version>
         <orderbyhelper-spring-boot.version>1.0.2</orderbyhelper-spring-boot.version>
         <!-- 校验连接错误：`druid.mysql.usePingMethod` - https://github.com/alibaba/druid/issues/3873 -->
         <druid-spring-boot.version>1.2.14</druid-spring-boot.version>
