@@ -2,6 +2,8 @@
 
 # 版本记录
 
+- [发行说明](./CHANGELOG.md)
+
 > 打包命令：`mvn clean install -U -P master`
 
 ## Git说明

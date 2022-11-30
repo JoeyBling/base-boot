@@ -16,6 +16,7 @@
         <spring-boot.version>2.7.6</spring-boot.version>
         <!-- main version setting -->
         <druid.version>1.2.14</druid.version>
+        <mybatis-generator.version>1.4.1</mybatis-generator.version>
         <!-- 基础配置 -->
         <java.version>1.8</java.version>
         <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
@@ -139,6 +140,14 @@
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
             <version>${druid.version}</version>
+            <optional>true</optional>
+        </dependency>
+        <!-- MyBatis Generator (MBG) 代码生成器：https://github.com/mybatis/generator -->
+        <dependency>
+            <groupId>org.mybatis.generator</groupId>
+            <artifactId>mybatis-generator-core</artifactId>
+            <version>${mybatis-generator.version}</version>
+            <scope>provided</scope>
             <optional>true</optional>
         </dependency>
         <dependency>
