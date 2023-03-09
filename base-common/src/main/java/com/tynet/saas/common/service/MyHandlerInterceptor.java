@@ -1,6 +1,7 @@
 package com.tynet.saas.common.service;
 
 import org.springframework.web.servlet.AsyncHandlerInterceptor;
+import org.springframework.web.servlet.HandlerInterceptor;
 
 import java.util.Arrays;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
  *
  * @author Created by 思伟 on 2021/3/29
  */
-public interface MyHandlerInterceptor extends AsyncHandlerInterceptor {
+public interface MyHandlerInterceptor extends AsyncHandlerInterceptor, HandlerInterceptor {
 
     /**
      * 拦截器默认排除路径(默认排除静态资源文件访问)
@@ -20,7 +21,7 @@ public interface MyHandlerInterceptor extends AsyncHandlerInterceptor {
     /**
      * 获取注册的拦截器应用的URL模式
      *
-     * @return String[]
+     * @return {@code String} array.
      */
     default String[] getPath() {
         return new String[]{"/**"};
@@ -29,7 +30,7 @@ public interface MyHandlerInterceptor extends AsyncHandlerInterceptor {
     /**
      * 获取注册的拦截器排除的URL模式
      *
-     * @return String[]
+     * @return {@code String} array.
      */
     default String[] getExcludePath() {
         // 【强制】使用集合转数组的方法，必须使用集合的 toArray(T[] array)，传入的是类型完全一致、

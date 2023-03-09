@@ -45,4 +45,5 @@ public abstract class AbstractHandlerInterceptorDecorator<I extends HandlerInter
                                 Exception ex) throws Exception {
         this.target.afterCompletion(request, response, handler, ex);
     }
+
 }

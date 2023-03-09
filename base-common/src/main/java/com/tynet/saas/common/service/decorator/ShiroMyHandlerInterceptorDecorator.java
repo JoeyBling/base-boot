@@ -7,6 +7,7 @@ import com.tynet.saas.common.service.MyHandlerInterceptor;
  *
  * @author Created by 思伟 on 2021/3/29
  */
+@Deprecated
 public class ShiroMyHandlerInterceptorDecorator extends AbstractMyHandlerInterceptorDecorator {
     private static final long serialVersionUID = 1L;
 
@@ -18,6 +19,5 @@ public class ShiroMyHandlerInterceptorDecorator extends AbstractMyHandlerInterce
     public ShiroMyHandlerInterceptorDecorator(MyHandlerInterceptor target) {
         super(target);
     }
-
 
 }

@@ -14,10 +14,12 @@ import java.lang.reflect.Method;
  * A default {@link AsyncUncaughtExceptionHandler} that simply logs the exception.
  * 被`@Async`注解的方法在独立线程调用，不能被`@ControllerAdvice`全局异常处理器捕获，所以需要自己设置异常处理
  *
+ *
  * @author Created by 思伟 on 2020/11/24
- * @see org.springframework.aop.interceptor.SimpleAsyncUncaughtExceptionHandler
  */
-/* non-public */ public class LoggingAsyncUncaughtExceptionHandler extends SimpleAsyncUncaughtExceptionHandler {
+/* non-public */ public class LoggingAsyncUncaughtExceptionHandler
+        extends SimpleAsyncUncaughtExceptionHandler
+        implements AsyncUncaughtExceptionHandler {
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
@@ -45,7 +47,7 @@ import java.lang.reflect.Method;
                 }
             }
         }
-        if (isThrowException()) {
+        if (this.isThrowException()) {
             // Throw it...
             throw new RuntimeException(ex);
         }

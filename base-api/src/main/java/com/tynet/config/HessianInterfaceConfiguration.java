@@ -9,19 +9,22 @@ import org.springframework.context.annotation.Configuration;
  * Hessian接口配置
  *
  * @author Updated by 思伟 on 2020/6/28
+ * @deprecated 逐步弃用RPC远程技术支持
  */
+@Deprecated
 @Configuration
 public class HessianInterfaceConfiguration {
 
     /**
-     * 默认传输的序列化方法的工厂
+     * 序列化程序工厂
      *
      * @return {@link SerializerFactory}
      */
     @Bean
     @ConditionalOnMissingBean
-    public SerializerFactory pageSerializerFactory() {
-        return new SerializerFactory();
+    public SerializerFactory defaultSerializerFactory() {
+        // 默认传输的序列化方法的工厂
+        return SerializerFactory.createDefault();
     }
 
 }

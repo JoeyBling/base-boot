@@ -6,7 +6,7 @@
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent -->
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.6</version>
+        <version>2.7.9</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -43,17 +43,17 @@
 
         <!-- core version -->
         <cglib.version>3.3.0</cglib.version>
-        <mybatis.version>3.5.11</mybatis.version>
+        <mybatis.version>3.5.12</mybatis.version>
         <mybatis-spring.version>2.1.0</mybatis-spring.version>
         <mybatis-spring-boot.version>2.3.0</mybatis-spring-boot.version>
-        <mybatis-plus.version>3.5.2</mybatis-plus.version>
+        <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
         <!-- 从 `4.2.0` 开始统一了所有模块的版本号 -->
         <mapper-spring-boot.version>4.2.2</mapper-spring-boot.version>
-        <mapper5.version>2.0.0</mapper5.version>
+        <mapper5.version>2.1.0</mapper5.version>
         <pagehelper-spring-boot.version>1.4.6</pagehelper-spring-boot.version>
         <orderbyhelper-spring-boot.version>1.0.2</orderbyhelper-spring-boot.version>
         <!-- 校验连接错误：`druid.mysql.usePingMethod` - https://github.com/alibaba/druid/issues/3873 -->
-        <druid-spring-boot.version>1.2.14</druid-spring-boot.version>
+        <druid-spring-boot.version>1.2.16</druid-spring-boot.version>
 
         <!-- common tools version -->
         <commons-lang3.version>3.12.0</commons-lang3.version>
@@ -63,12 +63,13 @@
         <commons-io.version>2.11.0</commons-io.version>
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
         <commons-fileupload.version>1.4</commons-fileupload.version>
-        <httpclient.version>4.5.13</httpclient.version>
+        <httpclient.version>4.5.14</httpclient.version>
+        <httpclient5.version>5.2.1</httpclient5.version>
 
         <!-- other tools version -->
         <poi.version>5.2.3</poi.version>
         <google-zxing.version>3.5.1</google-zxing.version>
-        <jsoup.version>1.15.3</jsoup.version>
+        <jsoup.version>1.15.4</jsoup.version>
 
         <!-- 诊断工具 -->
         <arthas-spring-boot.version>3.6.7</arthas-spring-boot.version>
@@ -191,10 +192,17 @@
                 <artifactId>mapper-spring-boot-starter</artifactId>
                 <version>${mapper-spring-boot.version}</version>
                 <exclusions>
-                    <!-- https://stackoverflow.com/q/60021815/8470159 -->
+                    <!--
+                        非必须依赖（不应传递）：jpa-api、
+                        notes：https://stackoverflow.com/q/60021815/8470159
+                     -->
                     <exclusion>
                         <groupId>javax.persistence</groupId>
                         <artifactId>persistence-api</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>javax.persistence</groupId>
+                        <artifactId>javax.persistence-api</artifactId>
                     </exclusion>
                 </exclusions>
             </dependency>
@@ -205,8 +213,8 @@
                 <artifactId>mapper-bom</artifactId>
                 <version>${mapper5.version}</version>
                 <type>pom</type>
-                <!-- 依赖关系冲突：https://github.com/mybatis-mapper/mapper/issues/67 -->
-                <!--<scope>import</scope>-->
+                <!-- 依赖关系冲突（低版本）：https://github.com/mybatis-mapper/mapper/issues/67 -->
+                <scope>import</scope>
             </dependency>
 
             <!-- 分页拦截器 -->

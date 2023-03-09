@@ -18,4 +18,5 @@ public class SimpleMyHandlerInterceptorDecorator
     public SimpleMyHandlerInterceptorDecorator(MyHandlerInterceptor target) {
         super(target);
     }
+
 }

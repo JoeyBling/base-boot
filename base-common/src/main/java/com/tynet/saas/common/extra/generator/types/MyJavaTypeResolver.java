@@ -8,7 +8,7 @@ import java.sql.Types;
 import java.util.Properties;
 
 /**
- * 自定义类型解析器 <p>需添加插件依赖
+ * 自定义类型解析器 <p>需作为插件依赖运行
  *
  * @author Created by 思伟 on 2022/11/30
  */

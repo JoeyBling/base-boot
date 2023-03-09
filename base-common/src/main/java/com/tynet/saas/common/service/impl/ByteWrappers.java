@@ -1,6 +1,7 @@
 package com.tynet.saas.common.service.impl;
 
 import com.tynet.saas.common.service.ByteWrapper;
+import com.tynet.saas.common.util.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -122,9 +123,11 @@ public final class ByteWrappers {
     }
 
     /**
-     * 外部不提供实例化方法
+     * 外部不提供实例化方法 <p>Prohibited default constructor.
      */
     private ByteWrappers() {
+        throw new AssertionError(StringUtils.format(
+                "{} should not be instantiated", this.getClass().getSimpleName()));
     }
 
 }

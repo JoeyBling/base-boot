@@ -2,6 +2,7 @@ package com.tynet.saas.common.service.decorator;
 
 import com.tynet.saas.common.service.IDecoratorAble;
 import com.tynet.saas.common.service.MyHandlerInterceptor;
+import org.springframework.web.servlet.AsyncHandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,9 +16,8 @@ import javax.servlet.http.HttpServletResponse;
  * @author Created by 思伟 on 2021/3/29
  */
 public abstract class AbstractMyHandlerInterceptorDecorator
-        // extends AbstractHandlerInterceptorDecorator<MyHandlerInterceptorAdapter>
         extends AbstractHandlerInterceptorDecorator<MyHandlerInterceptor>
-        implements IDecoratorAble<MyHandlerInterceptor>, MyHandlerInterceptor {
+        implements IDecoratorAble<MyHandlerInterceptor>, MyHandlerInterceptor, AsyncHandlerInterceptor {
 
     /**
      * one public constructor
@@ -43,4 +43,5 @@ public abstract class AbstractMyHandlerInterceptorDecorator
     public String[] getExcludePath() {
         return this.target.getExcludePath();
     }
+
 }

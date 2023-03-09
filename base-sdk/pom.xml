@@ -16,17 +16,17 @@
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <commons-codec.version>1.15</commons-codec.version>
         <!-- main version setting -->
-        <lombok.version>1.18.24</lombok.version>
-        <junit-jupiter.version>5.9.0</junit-jupiter.version>
+        <lombok.version>1.18.26</lombok.version>
+        <junit-jupiter.version>5.9.2</junit-jupiter.version>
         <slf4j.version>1.7.36</slf4j.version>
         <logback.version>1.2.11</logback.version>
-        <log4j2.version>2.17.2</log4j2.version>
+        <log4j2.version>2.20.0</log4j2.version>
         <!-- 基础配置 -->
         <java.version>1.8</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
         <!-- 跳过测试 -->
@@ -36,7 +36,7 @@
     <!-- 依赖管理 -->
     <dependencyManagement>
         <dependencies>
-            <!-- 从基础服务导入依赖关系管理，不包括插件(优先级设为最高) -->
+            <!-- 从基础服务导入依赖关系管理（优先级最高） -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>base-bom</artifactId>
@@ -44,6 +44,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!-- JUnit 5（发行说明：https://junit.org/junit5/docs/current/release-notes/） -->
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
@@ -51,7 +52,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!-- slf4j - 嵌入式组件仅依赖于此 -->
+            <!-- slf4j（发行说明：https://www.slf4j.org/news.html） - 嵌入式组件仅依赖于此 -->
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
@@ -75,7 +76,7 @@
                 <artifactId>log4j-over-slf4j</artifactId>
                 <version>${slf4j.version}</version>
             </dependency>
-            <!-- slf4j - logback实现 -->
+            <!-- slf4j - logback日志框架实现（发行说明：https://logback.qos.ch/news.html） -->
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
@@ -86,6 +87,11 @@
                 <artifactId>logback-core</artifactId>
                 <version>${logback.version}</version>
             </dependency>
+            <!-- Apache Log4j 2
+                1. GitHub镜像：https://github.com/apache/logging-log4j2
+                2. 发行说明：https://logging.apache.org/log4j/2.x/release-notes/
+                3. notes：https://stackoverflow.com/q/60972865/8470159
+             -->
             <dependency>
                 <groupId>org.apache.logging.log4j</groupId>
                 <artifactId>log4j-bom</artifactId>
@@ -143,7 +149,7 @@
         </dependency>
         <dependency>
             <groupId>com.alibaba.fastjson2</groupId>
-            <artifactId>fastjson2-extension</artifactId>
+            <artifactId>fastjson2-extension-spring5</artifactId>
             <optional>true</optional>
         </dependency>
         <!-- google java lib -->
@@ -164,6 +170,7 @@
             <artifactId>bcprov-jdk18on</artifactId>
             <optional>true</optional>
         </dependency>
+        <!-- Lombok（变更日志：https://github.com/projectlombok/lombok/blob/master/doc/changelog.markdown） -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -206,7 +213,7 @@
             <scope>test</scope>
             <optional>true</optional>
         </dependency>
-        <!-- Log4j 2 - https://stackoverflow.com/q/60972865/8470159 -->
+        <!-- Log4j 2（SLF4J Adapter） -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-to-slf4j</artifactId>

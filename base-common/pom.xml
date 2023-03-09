@@ -13,13 +13,13 @@
     <!-- 项目属性 -->
     <properties>
         <!-- SpringBoot版本 -->
-        <spring-boot.version>2.7.6</spring-boot.version>
+        <spring-boot.version>2.7.9</spring-boot.version>
         <!-- main version setting -->
-        <druid.version>1.2.14</druid.version>
-        <mybatis-generator.version>1.4.1</mybatis-generator.version>
+        <druid.version>1.2.16</druid.version>
+        <mybatis-generator.version>1.4.2</mybatis-generator.version>
         <!-- 基础配置 -->
         <java.version>1.8</java.version>
-        <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
+        <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>

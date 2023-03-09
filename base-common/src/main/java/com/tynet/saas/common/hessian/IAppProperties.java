@@ -2,6 +2,7 @@ package com.tynet.saas.common.hessian;
 
 import lombok.Data;
 import org.apache.commons.io.FileUtils;
+import org.jetbrains.annotations.ApiStatus;
 
 import java.time.Duration;
 import java.util.LinkedHashMap;
@@ -48,6 +49,7 @@ public interface IAppProperties {
      * @deprecated 多机部署需接入文件存储服务
      */
     @Deprecated
+    @ApiStatus.Obsolete(since = "2.0.0")
     default String getStoragePath() {
         return FileUtils.getTempDirectoryPath();
     }
